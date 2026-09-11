@@ -1,91 +1,57 @@
 ---
-title: "Parity — Project Overview"
-description: "Purpose, stakeholders, MVP scope and stack for Parity: a scalable system for standardizing, formatting and matching purchase orders."
+title: "Parity Documentation"
+description: "Operational and product documentation for Parity and its infrastructure."
 ---
 
-# Parity — Purchase Order Standardization, Formatting and Matching
+# Parity Documentation
 
-<Tip>
-Integrator Project — **Scalable system for distributors** (initial case: food distribution, anonymized). Stack `Go + PostgreSQL + React + TypeScript` · HTTP API · Docker. Sensitive data: `lista_articulos.xlsx` never used in production, only fixtures in `testdata/`.
-</Tip>
+Parity is a product for standardizing, formatting and validating purchase orders with as little friction as possible. The system combines a processing platform, a product catalog and a review interface that turns messy orders —Excel, PDF or text— into data ready to import.
 
-## Purpose
-
-Parity automates the cycle **Excel → validation → catalog matching → human review → persistence** for purchase orders that are currently processed manually. It removes retyping, reduces code and quantity errors, and leaves traceability `R → US → TC`.
+This documentation is written for product, operations and engineering. It explains what Parity is trying to solve, how the core flows work, and how the technical system supports those flows.
 
 <CardGroup cols={2}>
-  <Card title="Orders" icon="file-spreadsheet" href="/en/docs/00-context/project-overview">
-    Upload, parsing (`excelize`), validation and persistence `orders`/`order_lines`
+  <Card title="Product logic" icon="notebook-text" href="/en/docs/02-product/product-definition">
+    Understand what problem Parity solves and how validation and matching flows work.
   </Card>
-  <Card title="Matching" icon="git-compare" href="/en/docs/05-architecture/api-design">
-    Exact / ambiguous / failed — normalization + scoring, manual editing in frontend
+  <Card title="Project status" icon="list-checks" href="/en/docs/00-context/project-status">
+    See what exists today, what is in progress and what the next priorities are.
   </Card>
-  <Card title="Catalog" icon="package" href="/en/docs/00-context/project-glossary">
-    `lista_articulos.xlsx` → `articles` (fixture only in tests)
+  <Card title="API spec" icon="braces" href="/en/docs/05-architecture/api-design">
+    Understand ingestion, query and matching APIs at a high level.
   </Card>
-  <Card title="API & Frontend" icon="code" href="/en/docs/05-architecture/api-design">
-    REST `cmd/server` + React TS `src/features/*`
+  <Card title="Operations" icon="activity" href="/en/docs/05-architecture/architecture">
+    See how Go, PostgreSQL, React and Docker fit together.
   </Card>
 </CardGroup>
 
-## Stakeholders
+## What Parity Does
 
-| Role | Need | Evidence |
-|------|------|----------|
-| **Operator (employee)** | Upload Excel and correct only the ambiguous rows | Interviews `docs/01-research` |
-| **Supervisor / Admin** | Traceability and audit `R→US→TC` | `docs/03-requirements` |
-| **Client company (distributor)** | Real catalog data, without filtering | `lista_articulos.xlsx` fixture only §13 |
+Parity helps sales and administration teams to:
 
-## MVP Scope
+* Import orders without retyping — from Excel, PDF or copied text.
+* Validate structure, quantities and codes against the catalog.
+* Resolve exact matching by code or barcode, and flag the ambiguous for human review.
+* Review in a familiar table, edit failures and export in one click to the internal format.
 
-<Steps>
-  <Step title="Upload & Excel parsing">
-    Handler `cmd/server` → `internal/parser` (excelize, 10MB limit) → `internal/orders`
-  </Step>
-  <Step title="Validation">
-    Header + lines, ghost rows, variant headers, decimals
-  </Step>
-  <Step title="Matching">
-    `internal/matching/normalize.go` → `barcode.go` → `description.go` → scorer → states `exact/ambiguous/failed`
-  </Step>
-  <Step title="Review & manual editing">
-    `src/features/matching` — table with badges, edit modal
-  </Step>
-  <Step title="Persistence">
-    PostgreSQL `migrations/*` — `orders`, `order_lines`, `articles`
-  </Step>
-</Steps>
+## Main System Components
 
-## Out of Scope (MVP)
+| Component | Purpose |
+| --- | --- |
+| Processing platform | Orchestrates validation, matching and order persistence. |
+| Catalog | Source of truth for products, codes and barcodes. |
+| Review interface | Web client to upload, review and correct orders. |
+| API | HTTP contracts for ingestion and queries. |
+| PostgreSQL | Durable source of orders and catalog. |
+| Docker | Consistent packaging and execution across environments. |
+| Mintlify | Documentation hosting and rendering. |
 
-<Warning>
-Do not include without `Problem → Requirement → Need → Alternatives → Decision → Technology` and Human Gate.
-</Warning>
+## Documentation Map
 
-- Queues / async (RabbitMQ), microservices, Kubernetes, Redis/caching
-- WhatsApp blurry photo OCR (PP4b) — ask for resend
-- Complex auth / multi-tenant
-- Real `lista_articulos.xlsx` in production — always fixture
+* **Overview** explains product logic, current status and glossary.
+* **Product** explains scope, value proposition, MVP and user flows.
+* **Design** explains guidelines, flows and design system.
+* **Technical** explains architecture, decisions and APIs.
 
-## Stack and Conventions
+## Current Stage
 
-| Layer | Stack | Pattern |
-|-------|-------|---------|
-| Backend | Go 1.22, `excelize` | Handler → Service → Repository, errors `%w` |
-| DB | PostgreSQL 16 | Versioned migrations |
-| Frontend | React + TypeScript | `src/api/types.ts` typed contract |
-| Infra | Docker Compose, GitHub Actions | `docker`/`ci-cd` |
-
-## Non-Negotiable Principles
-
-<Card title="Human Gate (§4)" icon="shield-check">
-No agent writes/modifies, commits, pushes, deletes, moves to Done, changes MVP, installs a dependency or decides under ambiguity without explicit confirmation via `question`.
-</Card>
-
-<Card title="Plan Mode (§5)" icon="file-check">
-Before building/modifying/executing anything, brief plan: what / what NOT / files / risks / reversibility → wait for `approved`. The agent may **suggest** plan mode if needed, never decide for the user.
-</Card>
-
-<Card title="Branches and Data (§13-§14)" icon="git-branch">
-Own branch, never `main` directly. Tests against fixture DB. `git pull --rebase origin main` before merge, serialize merges, never `--force`.
-</Card>
+Parity is in an MVP foundation phase. The architecture is intentionally simple: a Go API, a React frontend and a PostgreSQL database, all orchestrated with Docker. The goal is to validate the complete flow —from messy Excel to validated order in seconds— before introducing asynchronous processing or heavier infrastructure.

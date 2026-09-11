@@ -1,20 +1,47 @@
 ---
-title: "Project Status — Parity (2026-09-11)"
-description: "Current phase, scope and validated evidence for Parity."
+title: "Project Status"
+description: "What exists today, what is in progress and next priorities for Parity."
 ---
 
-# Project Status — Parity
+# Project Status
 
-> Cut `2026-09-11`. Sources: `Analisis/pain_points_a_mvp.md`, interviews, survey.
+Parity is in an MVP foundation phase. The platform already has the base architecture, infrastructure and several business modules, but the full end-to-end flow is still being hardened.
 
-## Current Phase
-End of Discovery → Product/Architecture definition. `00-context` and `04-ux` complete, `01-research` complete (but not published), `02-product` and `05-architecture` stubs pending.
+## Current Stage
 
-## What Is Validated
-- Problem is real: 30–40% operational time on validation, 4 recurrent symptoms; survey (n=21) shows ambiguity 43% frequent.
-- Matching via barcode is viable with real catalog (2,119 SKUs, 3 barcode columns).
+The project is past the prototype stage. It already has separate repositories, database persistence, documentation and API specs.
 
-## Next Steps
-- Complete `02-product` (scope, value prop, BMC, MVP) from `pain_points_a_mvp.md`
-- Complete `05-architecture` (domain model, API design)
-- Keep `07-domain-data` never in public docs, `06-development` momentarily excluded.
+The main goal now is to connect the product loops end to end:
+
+<CardGroup cols={2}>
+  <Card title="Import loop" icon="file-spreadsheet">
+    User uploads Excel or PDF, platform extracts and validates lines and generates a preview.
+  </Card>
+  <Card title="Matching loop" icon="git-compare">
+    Platform matches each line against the catalog by code or barcode and marks exact, ambiguous and failed.
+  </Card>
+  <Card title="Review loop" icon="table">
+    User reviews in a table, corrects failures and exports in one click to the internal format.
+  </Card>
+  <Card title="Observability loop" icon="activity">
+    Structured logs and validation allow auditing what was imported and how it was resolved.
+  </Card>
+</CardGroup>
+
+## What Exists Today
+
+| Area | Status | Operational Meaning |
+| --- | --- | --- |
+| Documentation | Active on Mintlify | Product, technical and operations centralized. |
+| API | Go + PostgreSQL on Docker | Orchestrates validation, matching and persistence. |
+| Interface | React + TypeScript | Upload, review and manual editing. |
+| Catalog | PostgreSQL | Durable source of products and codes. |
+| Infrastructure | Docker Compose | Reproducible stack locally and in production. |
+
+## Next Priorities
+
+1. Validate end-to-end Excel import and code/barcode matching.
+2. Harden the API contract before the frontend depends heavily on it.
+3. Complete frontend/API integration with consistent loading and error states.
+4. Sync the OpenAPI spec in the docs repository.
+5. Define the bilingual documentation workflow before translating every page.

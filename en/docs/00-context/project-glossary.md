@@ -1,15 +1,17 @@
 ---
-title: "Glossary — Parity"
-description: "Domain glossary for distributors, orders, catalog and matching."
+title: "Glossary"
+description: "Key terms for Parity: orders, catalog, matching and validation."
 ---
 
-# Glossary — Parity
+# Glossary
 
-| Term | Definition | Notes |
-|------|------------|-------|
-| **Generic Distributor** | Food distribution company — initial anonymized case, scalable to multiple distributors. Receives purchase orders from supermarkets/warehouses. | Payer hypothesis for Parity |
-| **Purchase Order (PO)** | Document sent by the client with product list and quantities. Can be Excel, PDF, mail/WhatsApp text or photo. Example: `OC N 94325` | Order |
-| **Internal Code** | Unique product identifier in the distributor's catalog (`codigo` in `lista_articulos.xlsx`, e.g. `5271`). Required by import system. | SKUs |
-| **Barcode** | Up to 3 EANs per SKU (`codbarra`, `codbarra2`, `codbarra3`). Key for PP2 duplicates after packaging change. | EAN-13 |
-| **Description** | Commercial name (e.g. `BUBBALOO 16,5g`). Ambiguous field (PP1) when client writes generic text. | — |
-| **Matching** | Algorithm that finds the internal `codigo` for a PO line: 1) exact code, 2) barcode fallback, 3) description (MVP only detects ambiguity). | Standardization |
+| Term | Definition |
+| --- | --- |
+| **Purchase Order** | Client document with product lines and quantities. Can be Excel, PDF or text. |
+| **Order Line** | Single row with code, description and requested quantity. |
+| **Catalog** | Source of truth for products: internal code, barcodes and normalized description. |
+| **Internal Code** | Unique product identifier in `articles` (e.g. `5271`). |
+| **Barcode** | EAN associated to the product, used as alternative key for matching. |
+| **Matching** | Process that classifies each line as exact, ambiguous or failed when crossing with the catalog. |
+| **Validation** | Structure, quantity and coherence checks before persisting. |
+| **Review** | Human step where failures are corrected and the order is confirmed for export. |
