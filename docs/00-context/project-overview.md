@@ -5,13 +5,13 @@
 
 ## 1. Elevator pitch
 
-**Parity — Estandarización de Órdenes de Compra**. Parity recibe la orden de compra tal como la envía el cliente (WhatsApp, email, PDF, Excel, foto) , la interpreta automáticamente contra el catálogo interno de **Raz y Cía** (distribuidora de alimentos, caso de estudio) y la deja lista en un dashboard tipo Excel para revisión humana en **segundos**, no en 20–30 minutos. No reemplaza al empleado: **lo asiste** — cuando algo es ambiguo, lo señala para que decida.
+**Parity — Estandarización de Órdenes de Compra**. Parity recibe la orden de compra tal como la envía el cliente (WhatsApp, email, PDF, Excel, foto) , la interpreta automáticamente contra el catálogo interno de **distribuidora de alimentos** (distribuidora de alimentos, caso de estudio) y la deja lista en un dashboard tipo Excel para revisión humana en **segundos**, no en 20–30 minutos. No reemplaza al empleado: **lo asiste** — cuando algo es ambiguo, lo señala para que decida.
 
 Fuente: `Entregables facu/Documentacion de proyecto/Resumen.txt:1-13` y `Relevamiento y Descubrimiento/1.2.Template Formulación inicial_V1.2.docx:41-62`.
 
 ## 2. Problema
 
-En Raz y Cía la recepción y carga de órdenes requiere que la información cumpla un formato determinado (`código producto + descripción + cantidad`), pero:
+En distribuidoras de alimentos la recepción y carga de órdenes requiere que la información cumpla un formato determinado (`código producto + descripción + cantidad`), pero:
 
 * Las órdenes llegan por **5+ canales** sin formato único (WhatsApp, correo, PDF, Excel, imágenes/fotos de baja calidad). Fuente: `Relevamiento/1.2.Template:28` + `Entrevista Transcripción 00:01:23`.
 * Cada cliente usa **sus propios códigos, su propia forma de describir productos y su propia lógica de cantidades** (cajas, unidades, display, bulto).
@@ -19,13 +19,13 @@ En Raz y Cía la recepción y carga de órdenes requiere que la información cum
 
 **Impacto medido:**
 
-* Entrevista a Juan (Supervisor de Ventas, 5 años en el puesto, confirmado empleado de Raz y Cía): dedica **30–40% de su tiempo operativo** a validación, **20–30 min por orden**; afirma que reducir a **2 minutos** ya sería un éxito. Fuente: `Entregable 3/Transcripcion de Entrevista.docx:00:00:18` + `Entregable 3/2.2 User Persona...:Juan`.
+* Entrevista a Juan (Supervisor de Ventas, 5 años en el puesto, confirmado empleado de distribuidora de alimentos (caso inicial anonimizado)): dedica **30–40% de su tiempo operativo** a validación, **20–30 min por orden**; afirma que reducir a **2 minutos** ya sería un éxito. Fuente: `Entregable 3/Transcripcion de Entrevista.docx:00:00:18` + `Entregable 3/2.2 User Persona...:Juan`.
 * Encuesta n=27 (n=21 que sí gestionan órdenes): **76,2%** (16/21) responde “Sí / Claramente” a que el proceso podría ser más simple/rápido. Fuente: `Encuesta (Respuestas).xlsx` (ver `01-research/survey-results.md`).
 * Evidencia real de matching (catálogo `lista_articulos.xlsx` 2.119 SKUs + 3 órdenes reales `OC_N_94325...`, `PEDIDO RAZ MONTE`, `WhatsApp Image`): **100% de las órdenes** no traen el código de cliente esperado y expresan cantidades de forma distinta.
 
 ## 3. Contexto organizacional
 
-* **Empresa caso:** distribuidora de alimentos (Raz y Cía), con clientes tipo supermercados/almacenes que hacen pedidos recurrentes.
+* **Empresa caso (escalable):** distribuidora de alimentos (caso inicial anonimizado, producto diseñado para múltiples distribuidoras), con clientes tipo supermercados/almacenes que hacen pedidos recurrentes.
 * **Usuarios directos:** empleados administrativos / facturación / logística que reciben, verifican y cargan órdenes. Perfil validado: 38% Administración, 19% Ventas, 14% Logística (encuesta).
 * **Usuarios indirectos:** clientes de la empresa que generan las órdenes (no usan Parity directamente, pero determinan los formatos).
 * **Comprador/pagador (hipótesis 02-product):** la empresa como organización que contrataría la licencia.
@@ -40,7 +40,7 @@ Orden llega (cualquier canal) → Extracción + Matcheo contra catálogo → Das
 
 * **Matcheo:** código exacto + código de barras (búsqueda en `codbarra`, `codbarra2`, `codbarra3` del catálogo). Tabla de mapeo `razón social / CUIT / sucursal → código cliente interno`.
 * **Detección de ambigüedad:** marca, no resuelve automáticamente (principio “no reemplazar criterio humano”).
-* **Exportación:** formato que exige el sistema interno de Raz y Cía (columnas `Código | Código Proveedor | Descripción | Unidades | ...` — ver `OC_N_94325_-_SUCURSAL_ROJAS.xlsx`).
+* **Exportación:** formato que exige el sistema interno de la distribuidora (genérico, escalable) (columnas `Código | Código Proveedor | Descripción | Unidades | ...` — ver `OC_N_94325_-_SUCURSAL_ROJAS.xlsx`).
 
 ## 5. Alcance MVP vs. visión
 
