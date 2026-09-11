@@ -44,6 +44,12 @@
             ]
           },
           {
+            "group": "Parity",
+            "pages": [
+              "docs/overview/parity-docs"
+            ]
+          },
+          {
             "group": "Diseño",
             "pages": [
               "docs/04-ux/ux-ui-guidelines",
