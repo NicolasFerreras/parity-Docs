@@ -1,42 +1,65 @@
----
-title: "Documentación de Parity"
-description: "Documentación operativa y de producto para Parity y su infraestructura."
----
+# Project Overview — Parity
 
-# Documentación de Parity
+> Documento público. Tono B2B universal: describe el producto para cualquier distribuidora, sin datos de casos particulares.
 
-Parity es un producto para estandarizar, formatear y validar órdenes de compra con la menor fricción posible. El sistema combina una plataforma de procesamiento, un catálogo de productos y una interfaz de revisión que convierte pedidos desordenados —Excel, PDF o texto— en datos listos para importar.
+## 1. Elevator pitch
 
-Esta documentación está escrita para producto, operaciones e ingeniería. Explica qué busca resolver Parity, cómo funcionan los flujos principales y cómo la arquitectura técnica sostiene esos flujos.
+**Parity — Estandarización de Órdenes de Compra**. Parity recibe la orden de compra tal como la envía el cliente (WhatsApp, email, PDF, Excel, foto), la interpreta automáticamente contra el catálogo interno y la deja lista en un dashboard tipo Excel para revisión humana en **segundos**, no en decenas de minutos. No reemplaza al empleado: **lo asiste** — cuando algo es ambiguo, lo señala para que decida.
 
-## Qué hace Parity
+## 2. Problema
 
-Parity ayuda a equipos de ventas y administración a:
+En una distribuidora la recepción y carga de órdenes exige un formato determinado (`código producto + descripción + cantidad`), pero:
 
-* Importar órdenes sin reescribir — desde Excel, PDF o texto copiado.
-* Validar estructura, cantidades y códigos contra el catálogo.
-* Resolver matching exacto por código o barra, y señalar lo ambiguo para revisión humana.
-* Revisar en una tabla familiar, editar lo fallido y exportar en un clic al formato interno.
+* Las órdenes llegan por **múltiples canales** sin formato único (WhatsApp, correo, PDF, Excel, fotos).
+* Cada cliente usa **sus propios códigos, su propia forma de describir productos y su propia lógica de cantidades** (cajas, unidades, display, bulto).
+* Hoy un empleado traduce todo **a mano**: busca a qué producto corresponde cada código, corrige unidades, resuelve ambigüedades a criterio propio.
 
-## Componentes principales
+**Impacto típico:** hasta 30 minutos por orden y una porción significativa de la jornada operativa dedicada a validación; la mayoría de los usuarios relevados cree que el proceso podría ser más simple y rápido.
+
+## 3. Para quién
+
+* **Usuarios directos:** empleados administrativos, de facturación, logística y ventas que reciben, verifican y cargan órdenes.
+* **Comprador:** la distribuidora como organización (licencia).
+* **Usuarios indirectos:** los clientes que generan las órdenes (no usan Parity, pero determinan los formatos).
+
+## 4. Solución propuesta (flujo TO-BE)
+
+```
+Orden llega (cualquier canal) → Extracción + Matcheo contra catálogo → Dashboard tipo Excel para revisión → Empleado confirma/corrige → Exportación 1-clic al formato del sistema interno
+```
+
+* **Matcheo:** código exacto + código de barras (hasta 3 EAN por producto). Tabla de mapeo `razón social / CUIT / sucursal → código cliente interno`.
+* **Detección de ambigüedad:** marca, no resuelve automáticamente (principio "no reemplazar criterio humano").
+* **Exportación:** formato de importación del sistema interno + log de validaciones para auditoría.
+
+## 5. Componentes principales del sistema
 
 | Componente | Propósito |
-| --- | --- |
-| Plataforma de procesamiento | Orquesta validación, matching y persistencia de órdenes. |
-| Catálogo | Fuente de verdad de productos, códigos y barras. |
-| Interfaz de revisión | Cliente web para subir, revisar y corregir órdenes. |
-| API | Contratos HTTP para ingesta y consulta. |
-| PostgreSQL | Fuente durable de órdenes y catálogo. |
-| Docker | Empaquetado y ejecución consistente entre entornos. |
-| Mintlify | Hosting y renderizado de documentación. |
+|---|---|
+| App web | Registro, login, subida de órdenes y dashboard de revisión. |
+| API | Backend de negocio y fuente de verdad (órdenes, catálogo, validaciones). |
+| PostgreSQL | Fuente durable de verdad. |
+| Storage | Archivos importados (efímeros) y exportados (retención 14 días). |
+| Auth gestionado | Registro, login y tokens JWT. |
+| Pipeline PDF + LLM | Extrae y estructura pedidos en PDF antes del matching. |
+| Sentry | Errores y caídas en producción. |
 
-## Mapa de documentación
+## 6. Alcance MVP vs. visión
 
-* **Resumen** explica lógica de producto, estado actual y glosario.
-* **Producto** explica alcance, propuesta de valor, MVP y flujos de usuario.
-* **Diseño** explica guías, flujos y sistema de diseño de la interfaz.
-* **Técnico** explica arquitectura, decisiones y APIs.
+| Dentro del MVP | Stretch (si alcanza el tiempo) | Explícitamente fuera |
+|---|---|---|
+| Detección de código de cliente (prerrequisito: sin esto no se exporta) | Texto libre (requiere pipeline LLM propio) | OCR sobre fotos ilegibles (salida digna: pedir reenvío legible) |
+| Matching por código exacto + barras | Cantidades por cliente, conversión de unidades | |
+| Importación/exportación de documentos | Visualización de catálogo | |
+| Detección (no resolución) de ambigüedad | | |
 
-## Etapa actual
+## 7. Métricas de éxito
 
-Parity está en fase fundacional de MVP. La arquitectura es intencionalmente simple: una API en Go, un frontend en React y una base PostgreSQL, todo orquestado con Docker. El objetivo es validar el flujo completo —de Excel desordenado a pedido validado en segundos— antes de introducir procesamiento asíncrono o infraestructura más pesada.
+* Tiempo por orden: decenas de minutos → menos de 5 (meta 2).
+* % de líneas matcheadas automáticamente sin intervención.
+* % de ambigüedades detectadas vs. no detectadas (falsos negativos).
+* Reducción de errores de facturación por código/cantidad equivocada.
+
+## 8. Etapa actual
+
+Fase fundacional de MVP: monolito modular + SPA con servicios gestionados. Objetivo: validar el ciclo central (orden entra → pedido validado sale) antes de infraestructura más pesada. Detalle en `project-status.md`.

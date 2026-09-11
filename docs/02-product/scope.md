@@ -1,25 +1,40 @@
----
-title: "Alcance"
-description: "Qué incluye y qué no incluye Parity en su versión inicial."
----
+# Alcance (Scope) — Parity
 
-# Alcance
+> Documento público. Qué entra al MVP, qué es stretch y qué está explícitamente fuera, con trazabilidad a dolores.
 
-Parity cubre el flujo completo desde la recepción de un pedido hasta su validación final, sin reemplazar los sistemas existentes del cliente.
+## 1. Dentro del MVP (núcleo comprometido)
 
-## Dentro del alcance
+| Funcionalidad | Dolor que ataca | Base |
+|---|---|---|
+| Detección de código de cliente (tabla razón social/CUIT → código) | Sin esto no se carga ningún pedido (prerrequisito) | Tabla de búsqueda simple |
+| Matching por código exacto + código de barras | Duplicados: mayor frustración operativa | Confirmado con datos reales |
+| Importación y exportación de documentos (Excel estructurado validado) | Transversal | Parse/export + storage centralizado |
+| Detección (no resolución) de ambigüedad en descripción | Ambigüedad: síntoma más frecuente | Reglas determinísticas (texto aproximado + trigramas); LLM solo como ayuda opcional |
 
-* Ingesta de Excel y PDF con extracción de líneas.
-* Validación de estructura, cantidades y códigos.
-* Matching por código interno y código de barras contra catálogo.
-* Revisión humana de casos ambiguos o fallidos en interfaz web.
-* Exportación en un clic al formato interno.
+## 2. Stretch del MVP (condicional — decisión de riesgo del equipo)
 
-## Fuera del alcance (MVP)
+Se intenta todo lo de abajo en el MVP, dejando fuera solo OCR. Si el tiempo no alcanza, **texto libre y/o detección de ambigüedad caen a v2 sin comprometer el resto**.
 
-* Procesamiento de fotos borrosas o audios.
-* Cálculo automático de precios o promociones.
-* Integración directa con ERPs de facturación.
-* Procesamiento asíncrono con colas o microservicios.
+| Funcionalidad | Condición |
+|---|---|
+| Interpretación de pedidos en texto libre (cuerpo mail/WhatsApp) | Requiere pipeline LLM propio |
+| Traducción de "cantidad" según formato del cliente (cajas/unidades/display/bulto) | Caso por caso por cliente |
+| Conversión automática de unidades (sueltas vs. docena) | Solo si se confirma tabla de conversión |
+| Visualización de catálogo de productos y clientes | Panel de consulta rápida |
 
-El objetivo es validar el flujo central con la menor infraestructura posible antes de escalar.
+**Fundamento:** la grilla de priorización evalúa cada funcionalidad por valor (evidencia de research) vs. esfuerzo (estimación técnica). El costo alto de un pipeline LLM está en construirlo la primera vez (prompts, errores del modelo, costo/latencia por orden, testing no determinístico).
+
+## 3. Explícitamente fuera del MVP
+
+| Funcionalidad | Motivo |
+|---|---|
+| OCR sobre fotos borrosas de WhatsApp | Viabilidad baja; existe solución no-técnica (pedir reenvío legible) |
+
+## 4. Trazabilidad dolor → funcionalidad
+
+- **Código cliente ausente → detección de cliente** (ninguna orden real trae el código esperado).
+- **Duplicados → matching por barcode** (resuelve cambio de packaging).
+- **Ambigüedad → detección** (marca, no adivina).
+- **Cantidad por cliente → traducción de cantidad** (v2 caso por caso).
+- **Conversión de unidades → conversión automática** (requiere tabla no confirmada).
+- **Texto libre → interpretación** (stretch); **foto borrosa → fuera**.

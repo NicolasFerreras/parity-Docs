@@ -1,47 +1,40 @@
----
-title: "Estado del proyecto"
-description: "Qué existe hoy, qué está en progreso y próximas prioridades de Parity."
----
+# Estado del Proyecto — Parity
 
-# Estado del proyecto
+> Documento público: estado del producto (qué existe, qué sigue), sin información de casos particulares ni del proceso académico.
 
-Parity está en fase fundacional de MVP. La plataforma ya cuenta con la arquitectura base, la infraestructura y varios módulos de negocio, pero el flujo completo de punta a punta aún se está consolidando.
+## 1. Fase actual
 
-## Etapa actual
+Fin de relevamiento y descubrimiento → definición de producto y arquitectura. El problema está validado como real y doloroso (tiempo operativo perdido, 4 síntomas recurrentes, frustración media-alta, margen de mejora ampliamente reconocido) y el matching propuesto como viable con datos reales.
 
-El proyecto superó la etapa de prototipo. Ya dispone de repositorios separados, persistencia en base de datos, documentación y especificaciones de API.
+## 2. Qué está validado
 
-El objetivo ahora es conectar los flujos de producto de extremo a extremo:
+* **Problema real:** formato heterogéneo, unidades distintas, duplicados por cambio de packaging y descripciones ambiguas aparecen con frecuencia en la operación diaria.
+* **Costo:** decenas de minutos por orden; la ambigüedad es el síntoma más frecuente y los duplicados el más frustrante.
+* **Viabilidad técnica:** catálogo con múltiples columnas de barcode + órdenes reales confirman que el matching exacto+barcode funciona; el mapeo de cliente por datos fiscales es factible.
+* **Decisión explícita:** fotos ilegibles fuera del MVP (OCR poco confiable; se mantiene "pedir reenvío legible").
 
-<CardGroup cols={2}>
-  <Card title="Ciclo de importación" icon="file-spreadsheet">
-    El usuario sube un Excel o PDF, la plataforma extrae y valida líneas y genera una vista previa.
-  </Card>
-  <Card title="Ciclo de matching" icon="git-compare">
-    La plataforma cruza cada línea contra el catálogo por código o barra y marca exactos, ambiguos y fallidos.
-  </Card>
-  <Card title="Ciclo de revisión" icon="table">
-    El usuario revisa en tabla, corrige fallidos y exporta en un clic al formato interno.
-  </Card>
-  <Card title="Ciclo de observación" icon="activity">
-    Logs estructurados y validación permiten auditar qué se importó y cómo se resolvió.
-  </Card>
-</CardGroup>
+## 3. Próximos pasos
 
-## Qué existe hoy
+| Área | Estado | Siguiente |
+|---|---|---|
+| Contexto y research | Completos | Mantener actualizados |
+| Producto (alcance, propuesta, MVP) | Definido | Refinar con uso real |
+| Requisitos (priorización) | Grilla completa | Historias, criterios y backlog |
+| UX (sistema, flujos, prototipo) | Definido | Wireframes y tests con usuarios |
+| Arquitectura | Definida (18 ADRs) | Spikes: PDF real, LLM, trigramas |
+| Desarrollo | Pendiente | Convenciones, testing, CI/CD |
+| Datos de dominio | Pendiente | Formatos y catálogo sanitizado |
+| Gestión | Pendiente | Roadmap, sprints, riesgos |
 
-| Área | Estado | Significado operativo |
-| --- | --- | --- |
-| Documentación | Activa en Mintlify | Producto, técnico y operaciones centralizados. |
-| API | Go + PostgreSQL en Docker | Orquesta validación, matching y persistencia. |
-| Interfaz | React + TypeScript | Subida, revisión y edición manual. |
-| Catálogo | PostgreSQL | Fuente durable de productos y códigos. |
-| Infraestructura | Docker Compose | Stack reproducible local y productivo. |
+## 4. Riesgos y supuestos activos
 
-## Próximas prioridades
+* **Calidad de entrada:** si el cliente envía foto ilegible, el MVP no lo resuelve — flujo "pedir reenvío".
+* **Tabla de conversión de unidades no confirmada:** depende de que exista mapeo por producto/cliente (stretch).
+* **Pipeline LLM:** costo/latencia por orden y privacidad de datos comerciales a evaluar en spike.
+* **Proyecto free en nube:** pausas por inactividad (mitigado con keep-alive) y retención de archivos acotada.
 
-1. Validar de extremo a extremo la importación de Excel y el matching por código/barra.
-2. Endurecer el contrato de API antes de que el frontend dependa fuertemente de él.
-3. Completar la integración de la interfaz con la API con estados de carga y error consistentes.
-4. Sincronizar la especificación OpenAPI en el repositorio de docs.
-5. Definir el flujo de documentación bilingüe antes de traducir cada página.
+## 5. Decisiones vigentes
+
+* Sin OCR en MVP; matching exacto antes que barcode; ambigüedad se detecta, no se adivina.
+* Auth gestionado (no casero); monolito modular + capas; repos separados; dev local + prod en nube.
+* Filas de origen LLM nacen en `revisar`; `ok` solo si idéntico a catálogo.

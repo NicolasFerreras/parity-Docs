@@ -25,6 +25,7 @@
           {
             "group": "Resumen",
             "pages": [
+              "docs/00-context/indice",
               "docs/00-context/project-overview",
               "docs/00-context/project-status",
               "docs/00-context/project-glossary",
@@ -34,6 +35,7 @@
           {
             "group": "Producto",
             "pages": [
+              "docs/02-product/indice",
               "docs/02-product/scope",
               "docs/02-product/product-definition",
               "docs/02-product/value-proposition",
@@ -41,12 +43,6 @@
               "docs/02-product/mvp-definition",
               "docs/04-ux/user-flows",
               "docs/04-ux/prototype"
-            ]
-          },
-          {
-            "group": "Parity",
-            "pages": [
-              "docs/overview/parity-docs"
             ]
           },
           {

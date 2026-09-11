@@ -1,22 +1,31 @@
----
-title: "Propuesta de valor"
-description: "Por qué elegir Parity."
----
+# Propuesta de Valor — Parity
 
-# Propuesta de valor
+> Documento público. Claim, problema→solución→beneficio y diferencial, en tono universal B2B.
 
-## Para operaciones
+## 1. Claim
 
-* **Horas devueltas:** de 20–30 minutos por pedido a segundos de revisión.
-* **Errores evitados:** validación contra catálogo antes de importar.
-* **Control intacto:** el usuario confirma, el sistema no decide solo.
+> **Orden desordenada entra, pedido validado sale. Sin re-tipeo, sin dudas ocultas.**
 
-## Para producto y ventas
+## 2. Problema → Solución → Beneficio
 
-* **Un solo flujo:** cualquier formato de cliente entra igual.
-* **Trazabilidad:** cada línea exportada guarda cómo se resolvió (código, barra, edición manual).
-* **Escalable:** pensado para múltiples catálogos y clientes sin cambiar de herramienta.
+| | Contenido |
+|---|---|
+| **Problema** | Cada cliente manda su pedido a su manera: WhatsApp, mail, PDF, foto. Traducirlo a mano quita horas y suma errores. |
+| **Solución** | parity lee cualquier formato, lo cruza con tu catálogo y lo deja en tabla familiar, marcando lo que necesita tu ojo. |
+| **Beneficio** | Horas devueltas, errores evitados, control intacto. Exportás en un clic, con trazabilidad. |
+| **Diferencial** | No reemplaza tu criterio. Lo potencia. Señala lo ambiguo, no lo inventa — y aprende de cada corrección. |
 
-## Diferencial
+## 3. Para quién duele y cuánto
 
-No es un conversor genérico: entiende códigos internos, barras y variantes de descripción del rubro distribución.
+- Buena parte de la jornada operativa se va en validación (decenas de minutos por orden).
+- La mayor frustración cualitativa son los duplicados ("retraducción manual"); el síntoma más frecuente, la ambigüedad.
+- El dolor cruza roles: administración, ventas, logística y compras.
+
+## 4. Por qué ganamos
+
+Evaluada contra 4 alternativas de proyecto, Parity ganó por *alineación con el problema* y *tiempo de desarrollo*: ataca exactamente los 4 síntomas con la menor complejidad.
+
+## 5. Mensajes listos para usar
+
+- Hero: *Pedidos sin fricción.* — "Subí la orden como te llegue y obtené una planilla validada contra tu catálogo en segundos. Tú revisás, parity ordena."
+- Confianza: *Confianza a la vista. Control en tus manos.* — validación trazable, sin caja negra.
