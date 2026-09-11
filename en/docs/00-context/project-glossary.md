@@ -1,5 +1,5 @@
 ---
-title: "Glossary"
+title: "Project Glossary"
 description: "Key terms for Parity: orders, catalog, matching and validation."
 ---
 

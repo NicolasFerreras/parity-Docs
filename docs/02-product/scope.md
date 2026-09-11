@@ -1,3 +1,7 @@
+---
+title: "Scope"
+---
+
 # Alcance (Scope) — Parity
 
 > Documento público. Qué entra al MVP, qué es stretch y qué está explícitamente fuera, con trazabilidad a dolores.

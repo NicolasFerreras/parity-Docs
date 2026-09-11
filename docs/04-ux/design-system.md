@@ -1,4 +1,8 @@
-﻿# Design System — Parity
+﻿---
+title: "Design System"
+---
+
+# Design System — Parity
 
 > Identidad visual de Parity: logo dual + paleta confirmada + tipografía del logotipo. Estado: dirección visual de UI en investigación — aquí se documenta lo definido + pendientes explícitos.
 

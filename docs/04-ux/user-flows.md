@@ -1,5 +1,5 @@
 ---
-title: "user-flows"
+title: "User Flows"
 ---
 
 # User Flows — Parity

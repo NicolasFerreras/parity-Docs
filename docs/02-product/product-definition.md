@@ -1,3 +1,7 @@
+---
+title: "Product Definition"
+---
+
 # Definición de Producto — Parity
 
 > Documento público. Qué es el producto, para quién y cómo funciona, en lenguaje universal.

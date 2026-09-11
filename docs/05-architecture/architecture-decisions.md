@@ -1,4 +1,8 @@
-﻿# Decisiones de Arquitectura — Parity
+﻿---
+title: "Architecture Decisions"
+---
+
+# Decisiones de Arquitectura — Parity
 
 > Lista de decisiones vigentes. Cada una sigue Problema → Alternativas → Decisión → Consecuencias. Trazabilidad a decisiones de equipo relevadas.
 > **Fecha:** 2026-09-11.

@@ -1,3 +1,7 @@
+---
+title: "Project Overview"
+---
+
 # Project Overview — Parity
 
 > Documento público. Tono B2B universal: describe el producto para cualquier distribuidora, sin datos de casos particulares.

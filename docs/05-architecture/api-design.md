@@ -1,5 +1,5 @@
 ---
-title: "api-design"
+title: "API Design"
 ---
 
 # Diseño de API — Parity (`/api/v1`)

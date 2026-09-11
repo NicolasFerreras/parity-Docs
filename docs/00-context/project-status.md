@@ -1,3 +1,7 @@
+---
+title: "Project Status"
+---
+
 # Estado del Proyecto — Parity
 
 > Documento público: estado del producto (qué existe, qué sigue), sin información de casos particulares ni del proceso académico.

@@ -1,4 +1,8 @@
-﻿# UX/UI Guidelines — Parity
+﻿---
+title: "UX/UI Guidelines"
+---
+
+# UX/UI Guidelines — Parity
 
 > Guía de tono, identidad y principios de Parity. Referencia para todo `04-ux`.
 

@@ -1,3 +1,7 @@
+---
+title: "Project Glossary"
+---
+
 # Glosario — Parity
 
 > Vocabulario del dominio (distribuidoras, órdenes de compra, catálogo). Términos universales, sin referencias a casos particulares.

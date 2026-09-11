@@ -1,3 +1,7 @@
+---
+title: "Value Proposition"
+---
+
 # Propuesta de Valor — Parity
 
 > Documento público. Claim, problema→solución→beneficio y diferencial, en tono universal B2B.

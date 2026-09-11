@@ -1,5 +1,5 @@
 ---
-title: "Business Model"
+title: "Business Model Canvas"
 description: "How Parity sustains."
 ---
 

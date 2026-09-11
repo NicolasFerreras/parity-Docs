@@ -1,3 +1,7 @@
+---
+title: "CÃ³mo trabajamos"
+---
+
 # Cómo trabajamos (agentes)
 
 > La construcción de Parity se apoya en un equipo de agentes de IA especializados, coordinados por un orquestador y supervisados por personas en cada paso importante.

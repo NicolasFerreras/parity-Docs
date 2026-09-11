@@ -1,3 +1,7 @@
+---
+title: "MVP Definition"
+---
+
 # Definición de MVP — Parity
 
 > Documento público. Qué debe cumplir el MVP, qué hipótesis valida y qué riesgos asume.
