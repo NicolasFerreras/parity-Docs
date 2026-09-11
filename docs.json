@@ -12,61 +12,93 @@
     "light": "#5DE9AA",
     "dark": "#0D9373"
   },
-  "topbarLinks": [],
   "topbarCtaButton": {
     "name": "GitHub",
     "url": "https://github.com/NicolasFerreras/parity-Docs"
   },
-  "tabs": [
-    {
-      "name": "Documentación",
-      "url": "docs"
-    }
-  ],
-  "anchors": [
-    {
-      "name": "API",
-      "icon": "code",
-      "url": "api"
-    }
-  ],
   "navigation": {
-    "groups": [
+    "languages": [
       {
-        "group": "00 — Contexto",
-        "pages": [
-          "docs/00-context/project-overview",
-          "docs/00-context/readme",
-          "docs/00-context/project-glossary",
-          "docs/00-context/project-status",
-          "docs/00-context/push-rules"
+        "language": "es",
+        "default": true,
+        "groups": [
+          {
+            "group": "Resumen",
+            "pages": [
+              "docs/00-context/project-overview",
+              "docs/00-context/project-status",
+              "docs/00-context/project-glossary",
+              "docs/00-context/push-rules"
+            ]
+          },
+          {
+            "group": "Producto",
+            "pages": [
+              "docs/02-product/scope",
+              "docs/02-product/product-definition",
+              "docs/02-product/value-proposition",
+              "docs/02-product/business-model-canvas",
+              "docs/02-product/mvp-definition",
+              "docs/04-ux/user-flows",
+              "docs/04-ux/prototype"
+            ]
+          },
+          {
+            "group": "Diseño",
+            "pages": [
+              "docs/04-ux/ux-ui-guidelines",
+              "docs/04-ux/design-system"
+            ]
+          },
+          {
+            "group": "Técnico",
+            "pages": [
+              "docs/05-architecture/architecture",
+              "docs/05-architecture/architecture-decisions",
+              "docs/05-architecture/api-design"
+            ]
+          }
         ]
       },
       {
-        "group": "02 — Producto",
-        "pages": [
-          "docs/02-product/scope",
-          "docs/02-product/product-definition",
-          "docs/02-product/value-proposition",
-          "docs/02-product/business-model-canvas",
-          "docs/02-product/mvp-definition"
-        ]
-      },
-      {
-        "group": "04 — UX/UI",
-        "pages": [
-          "docs/04-ux/ux-ui-guidelines",
-          "docs/04-ux/user-flows",
-          "docs/04-ux/design-system",
-          "docs/04-ux/prototype"
-        ]
-      },
-      {
-        "group": "05 — Arquitectura",
-        "pages": [
-          "docs/05-architecture/architecture",
-          "docs/05-architecture/architecture-decisions",
-          "docs/05-architecture/api-design"
+        "language": "en",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "en/docs/00-context/project-overview",
+              "en/docs/00-context/project-status",
+              "en/docs/00-context/project-glossary",
+              "en/docs/00-context/push-rules"
+            ]
+          },
+          {
+            "group": "Product",
+            "pages": [
+              "en/docs/02-product/scope",
+              "en/docs/02-product/product-definition",
+              "en/docs/02-product/value-proposition",
+              "en/docs/02-product/business-model-canvas",
+              "en/docs/02-product/mvp-definition",
+              "en/docs/04-ux/user-flows",
+              "en/docs/04-ux/prototype"
+            ]
+          },
+          {
+            "group": "Design",
+            "pages": [
+              "en/docs/04-ux/ux-ui-guidelines",
+              "en/docs/04-ux/design-system"
+            ]
+          },
+          {
+            "group": "Technical",
+            "pages": [
+              "en/docs/05-architecture/architecture",
+              "en/docs/05-architecture/architecture-decisions",
+              "en/docs/05-architecture/api-design"
+            ]
+          }
         ]
       }
     ]

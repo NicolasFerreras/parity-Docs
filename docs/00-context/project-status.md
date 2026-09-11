@@ -43,7 +43,7 @@ Checklist de entregables académicos:
 
 ## 4. Riesgos y supuestos activos
 
-* **Muestra encuesta general, no solo Raz y Cía:** 21 respuestas son de rubros variados (validado en `pain_points_a_mvp.md:6` — “porcentajes reflejan problema en rubro en general”). Mitigación: entrevista Juan + evidencia real de matching son la validación específica.
+* **Muestra encuesta general, no solo distribuidora de alimentos:** 21 respuestas son de rubros variados (validado en `pain_points_a_mvp.md:6` — “porcentajes reflejan problema en rubro en general”). Mitigación: entrevista Juan + evidencia real de matching son la validación específica.
 * **Acceso limitado a stakeholders:** solo 1 entrevista en profundidad (Juan) vs. objetivo 3–5. Mitigación: ampliar entrevistas antes de cerrar requirements.
 * **Tabla de conversión de unidades (PP3/PP6) no confirmada:** depende de que exista mapeo por producto/cliente.
 * **Dependencia de calidad de datos de entrada:** si cliente envía foto borrosa, Parity no resuelve en MVP — flujo alternativo “pedir reenvío” (ya usado hoy).
