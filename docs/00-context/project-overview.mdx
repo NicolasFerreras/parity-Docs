@@ -1,0 +1,124 @@
+---
+title: "Parity — Contexto del Proyecto"
+description: "Propósito, stakeholders, alcance MVP y stack de Parity: sistema para estandarización, formateo y matcheo de órdenes de compra para Raz y Cía."
+---
+
+# Parity — Sistema para estandarización, formateo y matcheo de órdenes de compra
+
+<Tip>
+Proyecto Integrador 1 — **Raz y Cía.** Stack `Go + PostgreSQL + React + TypeScript` · API HTTP · Docker. Datos sensibles: `lista_articulos.xlsx` nunca se usa en prod, solo fixtures en `testdata/`.
+</Tip>
+
+## Propósito
+
+Parity automatiza el ciclo **Excel → validación → matcheo contra catálogo → revisión humana → persistencia** para órdenes de compra que hoy se procesan manualmente. Elimina re-tipeo, reduce errores de código/cantidad y deja trazabilidad `R → US → TC`.
+
+<CardGroup cols={2}>
+  <Card title="Ordenes" icon="file-spreadsheet" href="/context-map/ordenes">
+    Upload, parsing (`excelize`), validación y persistencia `orders`/`order_lines`
+  </Card>
+  <Card title="Matching" icon="git-compare" href="/context-map/matching">
+    Exacto / ambiguo / fallido — normalización + score, edición manual en FE
+  </Card>
+  <Card title="Catálogo" icon="package" href="/context-map/catalogo">
+    `lista_articulos.xlsx` → `articles` (solo fixture en test)
+  </Card>
+  <Card title="API & Frontend" icon="code" href="/context-map/api">
+    REST `cmd/server` + React TS `src/features/*`
+  </Card>
+</CardGroup>
+
+## Stakeholders
+
+| Rol | Necesidad | Evidencia |
+|-----|-----------|-----------|
+| **Operador (empleado Raz)** | Subir Excel y corregir solo lo ambiguo | Entrevistas `docs/01-research` |
+| **Supervisor / Admin** | Trazabilidad y auditoría `R→US→TC` | `docs/03-requirements` |
+| **Raz y Cía (cliente)** | Datos catálogo reales, sin filtrar | `lista_articulos.xlsx` solo fixture §13 |
+
+## Alcance MVP
+
+<Steps>
+  <Step title="Upload & parsing Excel">
+    Handler `cmd/server` → `internal/parser` (excelize, límite 10MB) → `internal/ordenes`
+  </Step>
+  <Step title="Validación">
+    Cabecera + líneas, filas fantasma, encabezados variantes, decimales
+  </Step>
+  <Step title="Matching">
+    `internal/matching/normalize.go` → `barcode.go` → `description.go` → scorer → estados `exact/ambiguous/failed`
+  </Step>
+  <Step title="Revisión & edición manual">
+    `src/features/matching` — tabla con badges, modal edición
+  </Step>
+  <Step title="Persistencia">
+    PostgreSQL `migrations/*` — `orders`, `order_lines`, `articles`
+  </Step>
+</Steps>
+
+## Fuera de alcance (MVP)
+
+<Warning>
+No incluir sin `Problema → Requisito → Necesidad → Alternativas → Decisión → Tecnología` y Human Gate.
+</Warning>
+
+- Colas / async (RabbitMQ), microservicios, K8s, Redis/caching
+- OCR foto borrosa WhatsApp (PP4b) — pedir reenvío
+- Auth compleja / multi-tenant
+- `lista_articulos.xlsx` real en prod — siempre fixture
+
+## Stack y convenciones
+
+| Capa | Stack | Patrón |
+|------|-------|--------|
+| Backend | Go 1.22, `excelize` | Handler → Service → Repository, errores `%w` |
+| DB | PostgreSQL 16 | migraciones versionadas |
+| Frontend | React + TypeScript | `src/api/types.ts` contrato tipado |
+| Infra | Docker Compose, GH Actions | `docker`/`ci-cd` |
+
+## Principios no negociables
+
+<Card title="Human Gate (§4)" icon="shield-check">
+Ningún agente escribe/modifica, commitea, pushea, elimina, mueve Done, cambia MVP, instala dependencia o decide con ambigüedad sin confirmación vía `question`.
+</Card>
+
+<Card title="Modo Plan (§5)" icon="file-check">
+Antes de construir/modificar/ejecutar cualquier cosa, plan breve: qué / qué NO / archivos / riesgos / reversibilidad → esperar `aprobado`. El agente puede **sugerir** modo plan si lo considera necesario, nunca decidir por el usuario.
+</Card>
+
+<Card title="Ramas y datos (§13-§14)" icon="git-branch">
+Branch propia, nunca `main` directo. Tests contra DB fixture. `git pull --rebase origin main` antes de merge, serializar merge, nunca `--force`.
+</Card>
+
+## Mapa de Contexto para Agentes
+
+```text
+context-map/
+├── index.md
+├── ordenes.md
+├── matching.md
+├── catalogo.md
+├── api.md
+└── frontend.md
+```
+
+Ver `context-map/*.md` para decisiones y errores conocidos.
+
+## Workflows
+
+| Comando | Cuándo |
+|---------|--------|
+| `/new-feature` (8.1) | Idea → R → US → UX → dev → QA → review → PR |
+| `/user-story` (8.2) | Story existente → criterios → UX → BE → FE → QA |
+| `/pull-request` (8.3) | CI → review → merge |
+| `/bug-fix` (8.4) | Reproducir → test que falla → fix → regression |
+| `/requirement-change` (8.5) | Impacto requisitos/MVP/stories/UX/arch |
+| `/release` (8.6) | QA → acceptance → RC → staging → smoke → prod |
+
+## Tutor
+
+El Tutor / Mentor Técnico Senior (`@tutor-senior`, 6.10) se consulta directo con metodología Qué/Por qué/Para qué/Cómo. No escribe código ni decide arquitectura.
+
+---
+
+> Siguiente: `docs/01-research`, `docs/03-requirements`, `docs/04-ux`, `docs/05-architecture`. Cada agente lee `context-map/index.md` antes de tocar código.

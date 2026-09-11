@@ -1,72 +1,93 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Parity",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
-  "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
   },
   "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#03F07C",
+    "light": "#5DE9AA",
+    "dark": "#0D9373"
+  },
+  "topbarLinks": [],
+  "topbarCtaButton": {
+    "name": "GitHub",
+    "url": "https://github.com/NicolasFerreras/parity-Docs"
+  },
+  "tabs": [
+    {
+      "name": "Documentación",
+      "url": "docs"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "API",
+      "icon": "code",
+      "url": "api"
+    }
+  ],
   "navigation": {
-    "pages": [
+    "groups": [
       {
-        "group": "Getting Started",
+        "group": "00 — Contexto",
         "pages": [
-          "index",
-          "quickstart"
+          "docs/00-context/project-overview",
+          "docs/00-context/readme",
+          "docs/00-context/project-glossary",
+          "docs/00-context/project-status",
+          "docs/00-context/push-rules"
+        ]
+      },
+      {
+        "group": "02 — Producto",
+        "pages": [
+          "docs/02-product/scope",
+          "docs/02-product/product-definition",
+          "docs/02-product/value-proposition",
+          "docs/02-product/business-model-canvas",
+          "docs/02-product/mvp-definition"
+        ]
+      },
+      {
+        "group": "04 — UX/UI",
+        "pages": [
+          "docs/04-ux/ux-ui-guidelines",
+          "docs/04-ux/user-flows",
+          "docs/04-ux/design-system",
+          "docs/04-ux/prototype"
+        ]
+      },
+      {
+        "group": "05 — Arquitectura",
+        "pages": [
+          "docs/05-architecture/architecture",
+          "docs/05-architecture/architecture-decisions",
+          "docs/05-architecture/api-design"
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
-    }
-  },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
     ]
   },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
-  }
+  "footerSocials": {
+    "github": "https://github.com/NicolasFerreras/parity-Docs"
+  },
+  "exclude": [
+    ".opencode/**",
+    "context-map/**",
+    "Parity Doc/**",
+    "node_modules/**",
+    ".git/**",
+    "docs/01-research/**",
+    "docs/03-requirements/**",
+    "docs/06-development/**",
+    "docs/07-domain-data/**",
+    "docs/08-project-management/**",
+    "docs/05-architecture/class-diagram",
+    "docs/05-architecture/data-model",
+    "docs/05-architecture/domain-model",
+    "docs/05-architecture/er-diagram"
+  ]
 }
