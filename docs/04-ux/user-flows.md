@@ -4,27 +4,15 @@
 
 ## 1. Flujo principal — Estandarizar orden para el empleado (happy path)
 
-**Diagrama fuente:** `flujo_estandarizador_para_empleado.svg` / `.png` — Título: “Flujo de la plataforma para el empleado” — Desc: “Cómo una orden entra al sistema, es procesada, revisada en dashboard y exportada a Excel o corregida si tiene errores.”
+```mermaid
+flowchart TD
+    A[Usuario arrastra Excel o PDF a la zona de carga] --> B[Plataforma extrae líneas, valida estructura y cantidades]
+    B --> C[Sistema cruza cada línea contra el catálogo por código o barra]
+    C --> D[Tabla muestra resultados con estados y permite editar fallidos]
+    D --> E[Usuario confirma y exporta en un clic]
+```
 
-```
-[Orden de compra: WhatsApp, email, PDF, foto]
-        └─► [Carga manual: arrastrar, copiar, pegar]
-                        │
-                        ▼
-          [Sistema extrae info: identifica productos y cantidad]
-                        │
-                        ▼
-          [Dashboard: el empleado revisa la orden]
-                        │
-                        ▼
-               ◇ ¿Todo correcto? ◇
-                 /            \
-              No (→)        Sí (→)
-               /                \
-[Corregir la orden: edición  [Exportar a Excel: un clic,
- tipo Excel]  ── vuelve a     listo para enviar]
- revisión
-```
+Detalle del flujo completo (8 nodos):
 
 ```mermaid
 flowchart TD

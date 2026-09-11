@@ -24,8 +24,3 @@
 ## 4. Por qué ganamos
 
 Evaluada contra 4 alternativas de proyecto, Parity ganó por *alineación con el problema* y *tiempo de desarrollo*: ataca exactamente los 4 síntomas con la menor complejidad.
-
-## 5. Mensajes listos para usar
-
-- Hero: *Pedidos sin fricción.* — "Subí la orden como te llegue y obtené una planilla validada contra tu catálogo en segundos. Tú revisás, parity ordena."
-- Confianza: *Confianza a la vista. Control en tus manos.* — validación trazable, sin caja negra.

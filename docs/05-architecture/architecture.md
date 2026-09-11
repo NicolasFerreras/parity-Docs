@@ -5,34 +5,37 @@
 
 ## Topología
 
-```
- DEV local (docker-compose)                    PROD (nube día 1, $0)
- ┌─ Supabase CLI (PG+Auth+Storage, Docker)      ┌─ Supabase cloud (PG+Storage+Auth)
- ├─ API Go (go run :8080)                        ├─ Render web service Free (Go :8080) + UptimeRobot (ping c/15min)
- └─ React (npm run dev :5173)                    └─ Cloudflare Pages (dashboard + landing)
- Repos separados: parity-api (Go+Goose) · parity-web (React+TS)
- CI/CD: GitHub Actions por repo (test + deploy en main, incluye `goose up`)
-```
-
-## Backend Go (`parity-api`)
-
-```
-cmd/server/            bootstrap (Gin router + handler stdlib archivos)
-internal/http/         handlers Gin, DTOs, middleware auth (JWKS→rol)
-internal/ordenes/      service/model/repository (órdenes + líneas)
-internal/matching/     normalización, exacto, barcode, candidatos trigrama, estados
-internal/catalogo/     importer idempotente por codigo, repository
-internal/parser/       excel (excelize) · pdf (pdfcpu + texto) · reconciliador PDF+LLM
-internal/llm/          interfaz LLMExtractor (proveedor por spike) — solo PDF-tabla
-internal/clientes/     mapeos CUIT→código (prerrequisito de exportación)
-migrations/            Goose · testdata/ fixtures (nunca datos reales de producción)
+```mermaid
+flowchart LR
+    subgraph DEV[DEV local]
+        SL[Supabase CLI: PG, Auth, Storage]
+        GA[API Go :8080]
+        WR[React :5173]
+    end
+    subgraph PROD[PROD nube dia 1]
+        SC[Supabase cloud]
+        RS[Render web service con keep-alive]
+        CF[Cloudflare Pages]
+    end
+    DEV -.->|CI-CD por repo| PROD
 ```
 
-Flujo PDF (ADR-009): upload stdlib → Storage → pdfcpu valida → extracción texto + LLM en paralelo → reconciliador (tabla→JSON LLM, texto→librería; filas LLM nacen `revisar`) → matching → dashboard.
+Repos separados: backend Go + migraciones · frontend React + TypeScript.
+CI/CD: GitHub Actions por repo (test + deploy en main).
 
-## Frontend React (`parity-web`)
+## Flujo PDF
 
-`supabase-js` (login/sesión) → Bearer a `/api/v1` → grilla editable (agregar/quitar/editar líneas, dropdown descripción con buscador que recalcula código) → export 1 clic. Sin lógica de matching en cliente. Deploy en Cloudflare Pages (`VITE_API_URL` por ambiente).
+```mermaid
+flowchart TD
+    U[Upload PDF] --> S[Storage]
+    S --> V[pdfcpu valida]
+    V --> T[Extraccion de texto]
+    V --> L[LLM responde JSON]
+    T --> R[Reconciliador: el JSON completa o corrige]
+    L --> R
+    R --> M[Matching contra catalogo]
+    M --> D[Dashboard]
+```
 
 ## Infraestructura y transversales
 
@@ -48,18 +51,18 @@ Flujo PDF (ADR-009): upload stdlib → Storage → pdfcpu valida → extracción
 
 ```mermaid
 flowchart LR
-    U[Upload Excel/PDF] --> S[(Storage: importadas/)]
-    S --> O[(orders + order_lines<br/>estado: revisar)]
+    U[Upload Excel o PDF] --> S[Storage importadas]
+    S --> O[orders y order_lines en revision]
     O --> J{jobs}
-    J -->|PDF-tabla| L[LLM + reconciliador]
-    J -->|Excel/texto| M[Matching]
+    J -->|PDF-tabla| L[LLM y reconciliador]
+    J -->|Excel o texto| M[Matching]
     L --> M
-    M --> A[(articles + client_mappings)]
-    M --> G[(order_lines<br/>ok/revisar/error/faltante)]
-    G --> LG[(match_logs)]
-    G --> E[Export .xlsx]
-    E --> SX[(Storage: exportadas/<br/>retención 14 días)]
-    S -.->|borrado al procesar| X([descartado])
+    M --> A[articles y client_mappings]
+    M --> G[lineas ok, revisar, error, faltante]
+    G --> LG[match_logs]
+    G --> E[Export xlsx]
+    E --> SX[Storage exportadas, 14 dias]
+    S -.->|borrado al procesar| X[descartado]
 ```
 
 ## Decisiones diferidas (no bloquean construcción inicial)

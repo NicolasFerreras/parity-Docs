@@ -14,10 +14,12 @@
 
 ## 3. Qué hace (flujo TO-BE)
 
-```
-Orden llega (cualquier canal) → Extracción + Matcheo contra catálogo
-→ Dashboard tipo Excel para revisión → Empleado confirma/corrige
-→ Exportación 1-clic al formato del sistema interno
+```mermaid
+flowchart TD
+    A[Orden llega - cualquier canal] --> B[Extracción + Matcheo contra catálogo]
+    B --> C[Dashboard tipo Excel para revisión]
+    C --> D[Empleado confirma/corrige]
+    D --> E[Exportación 1-clic al formato del sistema interno]
 ```
 
 - **Matcheo:** 1) código exacto, 2) fallback por código de barras (hasta 3 EAN por producto), 3) detección de ambigüedad por descripción (marca, no resuelve).

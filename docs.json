@@ -28,8 +28,7 @@
               "docs/00-context/indice",
               "docs/00-context/project-overview",
               "docs/00-context/project-status",
-              "docs/00-context/project-glossary",
-              "docs/00-context/push-rules"
+              "docs/00-context/project-glossary"
             ]
           },
           {
@@ -57,7 +56,14 @@
             "pages": [
               "docs/05-architecture/architecture",
               "docs/05-architecture/architecture-decisions",
-              "docs/05-architecture/api-design"
+              "docs/05-architecture/api-design",
+              "docs/05-architecture/data-model"
+            ]
+          },
+          {
+            "group": "Proceso",
+            "pages": [
+              "docs/08-project-management/como-trabajamos"
             ]
           }
         ]
@@ -70,8 +76,7 @@
             "pages": [
               "en/docs/00-context/project-overview",
               "en/docs/00-context/project-status",
-              "en/docs/00-context/project-glossary",
-              "en/docs/00-context/push-rules"
+              "en/docs/00-context/project-glossary"
             ]
           },
           {
