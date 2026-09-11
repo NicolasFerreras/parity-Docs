@@ -8,7 +8,7 @@
 ```
  DEV local (docker-compose)                    PROD (nube día 1, $0)
  ┌─ Supabase CLI (PG+Auth+Storage, Docker)      ┌─ Supabase cloud (PG+Storage+Auth)
- ├─ API Go (go run :8080)                        ├─ Render web service Free (Go :8080) + UptimeRobot ping <15min
+ ├─ API Go (go run :8080)                        ├─ Render web service Free (Go :8080) + UptimeRobot (ping c/15min)
  └─ React (npm run dev :5173)                    └─ Cloudflare Pages (dashboard + landing)
  Repos separados: parity-api (Go+Goose) · parity-web (React+TS)
  CI/CD: GitHub Actions por repo (test + deploy en main, incluye `goose up`)

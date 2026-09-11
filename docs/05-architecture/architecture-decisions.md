@@ -118,7 +118,7 @@
 ## ADR-018 — Render Free + ping; secrets en env vars; sin staging
 
 - **Problema:** tier, secretos y ambientes prod.
-- **Decisión (equipo):** Render plan Free con UptimeRobot <15min; secrets como env vars del servicio; sin staging (local + prod); dominios por defecto (`*.pages.dev`, `*.onrender.com`).
+- **Decisión (equipo):** Render plan Free con UptimeRobot (ping cada menos de 15 min); secrets como env vars del servicio; sin staging (local + prod); dominios por defecto (`*.pages.dev`, `*.onrender.com`).
 - **Consecuencias:** wake ~1min aceptado; si el sueño rompe demos, reabrir tier Starter por ADR.
 
 ## ADR-019 — Sin bot ni ingesta automática: MVP solo carga manual
