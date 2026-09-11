@@ -3,10 +3,10 @@
   "name": "Parity",
   "theme": "mint",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/logo-dark.png",
+    "light": "/logo/logo-light.png"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/logo/logo-light.png",
   "colors": {
     "primary": "#03F07C",
     "light": "#5DE9AA",
@@ -122,7 +122,6 @@
     "docs/07-domain-data/**",
     "docs/08-project-management/**",
     "docs/05-architecture/class-diagram",
-    "docs/05-architecture/data-model",
     "docs/05-architecture/domain-model",
     "docs/05-architecture/er-diagram"
   ]

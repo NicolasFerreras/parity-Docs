@@ -1,0 +1,50 @@
+# Parity — ignorados
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+build/
+vendor/
+*.log
+.DS_Store
+Thumbs.db
+
+# Go
+bin/
+coverage.out
+coverage.html
+
+# Frontend
+src/dist/
+.next/
+
+# Datos sensibles — nunca commitear el catálogo real
+lista_articulos.xlsx
+*.xlsx
+!fixtures/**/*.xlsx
+!testdata/**/*.xlsx
+
+# OpenCode cache
+.opencode/cache/
+
+# Staging público local — jamás se commitea (solo se copia desde aquí al publicar)
+docs/Docs repo/
+
+# Privado — jamás se commitea (Documentación interna del equipo)
+.opencode/
+context-map/
+AGENTS.md
+docs/01-research/
+docs/03-requirements/
+docs/05-architecture/class-diagram.md
+docs/05-architecture/domain-model.md
+docs/05-architecture/er-diagram.md
+docs/06-development/
+docs/07-domain-data/
+docs/08-project-management/approvals.md
+docs/08-project-management/release-plan.md
+docs/08-project-management/risks.md
+docs/08-project-management/roadmap.md
+docs/08-project-management/sprint-plan.md
+docs/flujo_arquitectura_completo.mermaid

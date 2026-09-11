@@ -30,7 +30,7 @@ Probar que una orden heterogénea (Excel/PDF/texto) se convierte en planilla val
 
 ## 5. Trazabilidad
 
-```mermaid
+```mermaid actions={true}
 flowchart LR
     P[Problema] --> E[Evidencia]
     E --> F[Funcionalidad]

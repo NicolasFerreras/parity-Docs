@@ -1,6 +1,6 @@
 # Cómo trabajamos (agentes)
 
-> El proceso de construcción de Parity: agentes de IA especializados, coordinados por un orquestador y supervisados por personas en cada paso importante.
+> La construcción de Parity se apoya en un equipo de agentes de IA especializados, coordinados por un orquestador y supervisados por personas en cada paso importante.
 
 %% Flujo completo de la arquitectura — Parity
 %% Basado en: arquitectura_agentes_skills_workflows_proyecto.md
@@ -11,7 +11,7 @@
 flowchart TD
 
     subgraph SG0["Entrada y Ruteo (sección 3)"]
-        U["Usuario escribe un mensaje<br/>en lenguaje natural"]
+        U["Persona escribe una solicitud<br/>en lenguaje natural"]
         ORCH{"Orchestrator<br/>interpreta el mensaje"}
         AMBIG{"¿Ambiguo entre<br/>2+ workflows?"}
         ASK["Pregunta al usuario<br/>cuál corresponde"]

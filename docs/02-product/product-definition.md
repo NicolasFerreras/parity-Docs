@@ -14,7 +14,7 @@
 
 ## 3. Qué hace (flujo TO-BE)
 
-```mermaid
+```mermaid actions={true}
 flowchart TD
     A[Orden llega - cualquier canal] --> B[Extracción + Matcheo contra catálogo]
     B --> C[Dashboard tipo Excel para revisión]

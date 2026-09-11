@@ -9,7 +9,7 @@ title: "architecture"
 
 ## Topología
 
-```mermaid
+```mermaid actions={true}
 flowchart LR
     subgraph DEV[DEV local]
         SL[Supabase CLI: PG, Auth, Storage]
@@ -29,7 +29,7 @@ CI/CD: GitHub Actions por repo (test + deploy en main).
 
 ## Flujo PDF
 
-```mermaid
+```mermaid actions={true}
 flowchart TD
     U[Upload PDF] --> S[Storage]
     S --> V[pdfcpu valida]
