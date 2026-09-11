@@ -1,12 +1,12 @@
 ---
 title: "Parity — Contexto del Proyecto"
-description: "Propósito, stakeholders, alcance MVP y stack de Parity: sistema para estandarización, formateo y matcheo de órdenes de compra para Raz y Cía."
+description: "Propósito, stakeholders, alcance MVP y stack de Parity: sistema escalable para estandarización, formateo y matcheo de órdenes de compra para distribuidoras"
 ---
 
 # Parity — Sistema para estandarización, formateo y matcheo de órdenes de compra
 
 <Tip>
-Proyecto Integrador 1 — **Raz y Cía.** Stack `Go + PostgreSQL + React + TypeScript` · API HTTP · Docker. Datos sensibles: `lista_articulos.xlsx` nunca se usa en prod, solo fixtures en `testdata/`.
+Proyecto Integrador 1 — **Sistema escalable para distribuidoras** Stack `Go + PostgreSQL + React + TypeScript` · API HTTP · Docker. Datos sensibles: `lista_articulos.xlsx` nunca se usa en prod, solo fixtures en `testdata/`.
 </Tip>
 
 ## Propósito
@@ -32,9 +32,9 @@ Parity automatiza el ciclo **Excel → validación → matcheo contra catálogo 
 
 | Rol | Necesidad | Evidencia |
 |-----|-----------|-----------|
-| **Operador (empleado Raz)** | Subir Excel y corregir solo lo ambiguo | Entrevistas `docs/01-research` |
+| **Operador (empleado)** | Subir Excel y corregir solo lo ambiguo | Entrevistas `docs/01-research` |
 | **Supervisor / Admin** | Trazabilidad y auditoría `R→US→TC` | `docs/03-requirements` |
-| **Raz y Cía (cliente)** | Datos catálogo reales, sin filtrar | `lista_articulos.xlsx` solo fixture §13 |
+| **Empresa cliente (distribuidora)** | Datos catálogo reales, sin filtrar | `lista_articulos.xlsx` solo fixture §13 |
 
 ## Alcance MVP
 
