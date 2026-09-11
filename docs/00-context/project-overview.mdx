@@ -1,13 +1,12 @@
 ---
 title: "Documentación de Parity"
-description: "Documentación operativa y de producto para Parity y su infraestructura."
 ---
 
-# Documentación de Parity
+> Documentación operativa y de producto de la plataforma Parity y su infraestructura de apoyo.
 
-Parity es un producto para estandarizar, formatear y validar órdenes de compra con la menor fricción posible. El sistema combina una plataforma de procesamiento, un catálogo de productos y una interfaz de revisión que convierte pedidos desordenados —Excel, PDF o texto— en datos listos para importar.
+Parity es un estandarizador de órdenes de compra para distribuidoras: recibe el pedido tal como lo envía cada cliente (Excel, PDF, foto, texto), lo interpreta automáticamente contra el catálogo interno y lo deja listo en un dashboard tipo planilla para revisión humana en segundos. Combina una aplicación web, un backend (API) y un pipeline de extracción con asistencia de LLM para los casos difíciles.
 
-Esta documentación está escrita para producto, operaciones e ingeniería. Explica qué busca resolver Parity, cómo funcionan los flujos principales y cómo la arquitectura técnica sostiene esos flujos.
+Esta documentación está escrita para lectores de producto, operaciones e ingeniería. Explica qué intenta lograr Parity, cómo funcionan los flujos centrales del negocio y cómo el sistema técnico los soporta
 
 <CardGroup cols={2}>
   <Card title="Lógica de producto" icon="notebook-text" href="/docs/02-product/product-definition">
@@ -17,41 +16,44 @@ Esta documentación está escrita para producto, operaciones e ingeniería. Expl
     Revisa qué existe hoy, qué está en progreso y cuáles son las próximas prioridades.
   </Card>
   <Card title="Especificación de API" icon="braces" href="/docs/05-architecture/api-design">
-    Entiende las APIs de ingesta, consulta y matching a alto nivel.
+    Visión general de la API, autenticación y modelo de datos.
   </Card>
   <Card title="Operaciones" icon="activity" href="/docs/05-architecture/architecture">
-    Mira cómo encajan Go, PostgreSQL, React y Docker.
+    Cómo conviven frontend, API, base de datos y observabilidad. 
   </Card>
 </CardGroup>
 
-## Qué hace Parity
+## Lo que hace Parity
 
-Parity ayuda a equipos de ventas y administración a:
+Parity ayuda a distribuidoras a:
 
-* Importar órdenes sin reescribir — desde Excel, PDF o texto copiado.
-* Validar estructura, cantidades y códigos contra el catálogo.
-* Resolver matching exacto por código o barra, y señalar lo ambiguo para revisión humana.
-* Revisar en una tabla familiar, editar lo fallido y exportar en un clic al formato interno.
+* Recibir órdenes en cualquier formato (Excel, PDF, texto) sin re-tipeo manual.
+* Identificar al cliente automáticamente (razón social / CUIT → código interno).
+* Matchear cada línea contra el catálogo (código exacto o código de barras).
+* Detectar ambigüedades y marcarlas para revisión humana, sin adivinar.
+* Corregir en una grilla editable y exportar en un clic al formato del sistema interno.
 
-## Componentes principales
+## Componentes principales del sistema
 
 | Componente | Propósito |
-| --- | --- |
-| Plataforma de procesamiento | Orquesta validación, matching y persistencia de órdenes. |
-| Catálogo | Fuente de verdad de productos, códigos y barras. |
-| Interfaz de revisión | Cliente web para subir, revisar y corregir órdenes. |
-| API | Contratos HTTP para ingesta y consulta. |
-| PostgreSQL | Fuente durable de órdenes y catálogo. |
-| Docker | Empaquetado y ejecución consistente entre entornos. |
-| Mintlify | Hosting y renderizado de documentación. |
+| :-- | :-- |
+| App web | Cliente para registro, login, subida de órdenes y dashboard de revisión. |
+| API | Backend de negocio y fuente de verdad para órdenes, catálogo y validaciones. |
+| PostgreSQL | Fuente durable de verdad para datos del producto. |
+| Storage | Guarda archivos importados y exportados con política de retención. |
+| Auth gestionado | Registro, login y tokens JWT sin auth casero. |
+| Pipeline PDF + LLM | Extrae y estructura pedidos en PDF antes del matching. |
+| Sentry | Captura de errores y caídas en producción. |
 
 ## Mapa de documentación
 
-* **Resumen** explica lógica de producto, estado actual y glosario.
-* **Producto** explica alcance, propuesta de valor, MVP y flujos de usuario.
-* **Diseño** explica guías, flujos y sistema de diseño de la interfaz.
-* **Técnico** explica arquitectura, decisiones y APIs.
+* **Resumen general** explica la lógica de producto, el estado actual y la forma del sistema.
+* **Producto** explica el ciclo de vida del usuario y el procesamiento de órdenes.
+* **Diseño** explica principios UX/UI, dashboard y sistema visual.
+* **Técnico** explica plataforma, pipeline PDF, APIs, auth y datos.
+* **Operaciones** explica despliegue, infraestructura, observabilidad y runbooks.
+* **Cómo trabajamos** explica el proceso de desarrollo con agentes y aprobaciones humanas.
 
-## Etapa actual
+## Etapa actual del producto
 
-Parity está en fase fundacional de MVP. La arquitectura es intencionalmente simple: una API en Go, un frontend en React y una base PostgreSQL, todo orquestado con Docker. El objetivo es validar el flujo completo —de Excel desordenado a pedido validado en segundos— antes de introducir procesamiento asíncrono o infraestructura más pesada.
+Parity está en fase fundacional de MVP.  Su arquitectura es un monolito modular para la API más una SPA, con servicios gestionados para base de datos, auth y hosting. El objetivo es validar el ciclo central (orden entra → pedido validado sale) antes de introducir infraestructura más pesada.

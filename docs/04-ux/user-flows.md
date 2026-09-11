@@ -1,4 +1,8 @@
-﻿# User Flows — Parity
+---
+title: "user-flows"
+---
+
+# User Flows — Parity
 
 > Flujo de la plataforma para el empleado (8 nodos): cómo una orden entra al sistema, es procesada, revisada en dashboard y exportada o corregida. Todos los flujos mantienen el principio “La tecnología asiste, la persona decide”.
 
@@ -27,15 +31,15 @@ flowchart TD
 
 **Pasos detallados:**
 
-| # | Nodo SVG | Acción usuario | Sistema | Salida |
-|---|---|---|---|---|
-| 1 | Orden de compra | — | — | Input heterogéneo (cualquier canal) |
-| 2 | Carga manual | Drag&drop / copy-paste / upload | — | Única vía de entrada en MVP (sin bot ni ingesta automática, ADR-019) |
-| 3 | Sistema extrae | — | Parser + matching: 1) código exacto 2) barcode (3 columnas EAN) 3) mapeo cliente CUIT→código 4) detección ambigüedad (marca, no resuelve) | Grilla precargada con 4 estados |
-| 4 | Dashboard | Revisa grilla tipo Excel (ver `design-system.md` columnas `Código|Código Proveedor|Descripción|Unidades|Display|U.Compra`) | Resalta dudas ámbar `#D5A129`, ok verde `#03F07C` | Decisión |
-| 5 | ¿Todo correcto? | Sí → Exportar / No → Corregir | — | — |
-| 6a | Exportar a Excel | 1 clic | Genera `OC_*.xlsx` formato interno + log de validaciones | Listo para enviar/facturar |
-| 6b | Corregir | Edita celdas inline, elige alternativa sugerida | Revalida | Vuelve a 4 |
+| # | Nodo SVG | Acción usuario | Sistema | Salida |  |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | Orden de compra | — | — | Input heterogéneo (cualquier canal) |  |  |  |  |  |
+| 2 | Carga manual | Drag&drop / copy-paste / upload | — | Única vía de entrada en MVP (sin bot ni ingesta automática, ADR-019) |  |  |  |  |  |
+| 3 | Sistema extrae | — | Parser + matching: 1) código exacto 2) barcode (3 columnas EAN) 3) mapeo cliente CUIT→código 4) detección ambigüedad (marca, no resuelve) | Grilla precargada con 4 estados |  |  |  |  |  |
+| 4 | Dashboard | Revisa grilla tipo Excel (ver `design-system.md` columnas \`Código | Código Proveedor | Descripción | Unidades | Display | U.Compra\`) | Resalta dudas ámbar `#D5A129`, ok verde `#03F07C` | Decisión |
+| 5 | ¿Todo correcto? | Sí → Exportar / No → Corregir | — | — |  |  |  |  |  |
+| 6a | Exportar a Excel | 1 clic | Genera `OC_*.xlsx` formato interno + log de validaciones | Listo para enviar/facturar |  |  |  |  |  |
+| 6b | Corregir | Edita celdas inline, elige alternativa sugerida | Revalida | Vuelve a 4 |  |  |  |  |  |
 
 ## 2. Flujos alternos / edge
 

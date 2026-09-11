@@ -1,39 +1,12 @@
-﻿# Modelo de Datos — Parity (PostgreSQL + Supabase)
+---
+title: "data-model"
+---
+
+# Modelo de Datos — Parity (PostgreSQL + Supabase)
 
 > Modelo físico en PostgreSQL + Supabase.
 > Migraciones versionadas. Extensión requerida: `pg_trgm` (similitud de texto).
 > **Fecha:** 2026-09-11.
-
-## Tablas
-
-```sql
--- Espejo mínimo del usuario Supabase (el login vive en auth.users)
-profiles(id uuid PK → auth.users, email text, rol text DEFAULT 'empleado' CHECK (rol IN ('admin','empleado')), nombre text);
-
-client_mappings(id serial PK, razon_social text, cuit text, sucursal text, direccion text,
-  codigo_cliente text NOT NULL UNIQUE, created_by uuid → profiles);
-
-articles(codigo text PK, codigo_proveedor text, descrip text NOT NULL, linea text,
-  codbarra text, codbarra2 text, codbarra3 text, unidad_base text);
-
-orders(id serial PK, client_mapping_id → client_mappings NULL (NULL = "no mapeado"),
-  canal text CHECK (canal IN ('excel','pdf','manual')), archivo_url text, estado text,
-  created_by uuid → profiles, created_at timestamptz);
-
-order_lines(id serial PK, order_id → orders ON DELETE CASCADE,
-  codigo text, codigo_proveedor text, descrip text, proveedor text,
-  unidades numeric, display numeric, u_compra numeric, costo_u numeric, total numeric,
-  estado text CHECK (estado IN ('ok','revisar','error','faltante')) DEFAULT 'revisar',
-  match_por text CHECK (match_por IN ('exacto','barra','manual','llm')) NULL,
-  articulo_codigo text → articles NULL);
-
-match_logs(id serial PK, order_line_id → order_lines, regla text,
-  antes jsonb, despues jsonb, usuario uuid → profiles, created_at timestamptz);
-
-jobs(id serial PK, order_id → orders ON DELETE CASCADE,
-  estado text CHECK (estado IN ('pendiente','procesando','listo','fallido')) DEFAULT 'pendiente',
-  error text NULL, created_at timestamptz, updated_at timestamptz);
-```
 
 ## Índices (matching)
 
@@ -44,7 +17,7 @@ jobs(id serial PK, order_id → orders ON DELETE CASCADE,
 
 ## Seguridad a nivel BD
 
-- RLS activada como **segunda capa**: políticas por rol desde el token; el backend opera con llave de servicio y enforza roles en middleware (primera capa).
+- RLS activada como **segunda capa**: políticas por rol desde el token; el backend opera con llave de servicio y refuerza roles en middleware (primera capa).
 - Archivos en Supabase Storage: buckets `ordenes/importadas/` (efímero, se borra al procesar) + `ordenes/exportadas/` (14 días vía `pg_cron`); registros SQL siempre. Límite Excel 10MB; tope PDF a definir (spike).
 
 ## Notas
@@ -55,7 +28,7 @@ jobs(id serial PK, order_id → orders ON DELETE CASCADE,
 
 ## Ciclo de vida del dato
 
-```mermaid
+```mermaid actions={true}
 flowchart LR
     U[Upload Excel o PDF] --> S[Storage importadas]
     S --> O[orders y order_lines en revision]

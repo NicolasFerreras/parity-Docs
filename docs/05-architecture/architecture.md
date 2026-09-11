@@ -1,4 +1,8 @@
-﻿# Arquitectura — Parity
+---
+title: "architecture"
+---
+
+# Arquitectura — Parity
 
 > Basada en `architecture-decisions.md` (ADRs 001–019) + `api-design.md`.
 > **Fecha:** 2026-09-11.
@@ -49,7 +53,7 @@ flowchart TD
 
 ## Ciclo de vida del dato
 
-```mermaid
+```mermaid actions={true}
 flowchart LR
     U[Upload Excel o PDF] --> S[Storage importadas]
     S --> O[orders y order_lines en revision]
