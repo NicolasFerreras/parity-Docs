@@ -1,5 +1,5 @@
 ---
-title: "Product Definition"
+title: "Definicion del producto"
 ---
 
 # Definición de Producto — Parity

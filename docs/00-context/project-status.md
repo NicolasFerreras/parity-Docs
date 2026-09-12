@@ -1,5 +1,5 @@
 ---
-title: "Project Status"
+title: "Estado del proyecto"
 ---
 
 # Estado del Proyecto — Parity

@@ -1,5 +1,5 @@
 ---
-title: "Scope"
+title: "Alcance"
 ---
 
 # Alcance (Scope) — Parity

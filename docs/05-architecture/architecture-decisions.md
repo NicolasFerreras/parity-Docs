@@ -1,5 +1,5 @@
-﻿---
-title: "Architecture Decisions"
+---
+title: "Decisiones de Arquitectura"
 ---
 
 # Decisiones de Arquitectura — Parity

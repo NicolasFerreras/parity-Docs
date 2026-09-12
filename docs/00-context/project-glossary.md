@@ -1,5 +1,5 @@
 ---
-title: "Project Glossary"
+title: "Glosario"
 ---
 
 # Glosario — Parity

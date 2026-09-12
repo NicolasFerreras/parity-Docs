@@ -1,5 +1,5 @@
-﻿---
-title: "Design System"
+---
+title: "Diseño de sistema"
 ---
 
 # Design System — Parity

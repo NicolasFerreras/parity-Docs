@@ -4,7 +4,7 @@ title: "Value Proposition"
 
 # Value Proposition — Parity
 
-> Public document. Claim, problem→solution→benefit and differentiator, in universal B2B tone.
+> Public document. Claim, problem→solution→benefit and differentiator
 
 ## 1. Claim
 

@@ -1,5 +1,5 @@
 ---
-title: "Data Model"
+title: "Modelo de datos"
 ---
 
 # Modelo de Datos — Parity (PostgreSQL + Supabase)

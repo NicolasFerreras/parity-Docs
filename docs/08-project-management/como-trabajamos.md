@@ -1,5 +1,5 @@
 ---
-title: "CÃ³mo trabajamos"
+title: "Como trabajamos"
 ---
 
 # Cómo trabajamos (agentes)

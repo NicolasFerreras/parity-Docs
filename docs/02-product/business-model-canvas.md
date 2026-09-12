@@ -4,7 +4,7 @@ title: "Business Model Canvas"
 
 # Business Model Canvas — Parity
 
-> Documento público. Modelo de negocio en 9 bloques, en lenguaje universal B2B.
+> Documento público. Modelo de negocio en 9 bloques.
 
 ## 1. Segmentos de cliente
 

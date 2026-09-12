@@ -1,5 +1,5 @@
 ---
-title: "MVP Definition"
+title: "Definicion de MVP"
 ---
 
 # Definición de MVP — Parity
