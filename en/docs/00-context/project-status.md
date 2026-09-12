@@ -1,47 +1,44 @@
 ---
 title: "Project Status"
-description: "What exists today, what is in progress and next priorities for Parity."
 ---
 
-# Project Status
+# Project Status — Parity
 
-Parity is in an MVP foundation phase. The platform already has the base architecture, infrastructure and several business modules, but the full end-to-end flow is still being hardened.
+> Public document: product status (what exists, what's next), with no case-specific or academic-process information.
 
-## Current Stage
+## 1. Current phase
 
-The project is past the prototype stage. It already has separate repositories, database persistence, documentation and API specs.
+Discovery done → product and architecture definition. The problem is validated as real and painful (lost operating time, 4 recurring symptoms, medium-high frustration, widely recognized room for improvement) and the proposed matching as viable with real data.
 
-The main goal now is to connect the product loops end to end:
+## 2. What's validated
 
-<CardGroup cols={2}>
-  <Card title="Import loop" icon="file-spreadsheet">
-    User uploads Excel or PDF, platform extracts and validates lines and generates a preview.
-  </Card>
-  <Card title="Matching loop" icon="git-compare">
-    Platform matches each line against the catalog by code or barcode and marks exact, ambiguous and failed.
-  </Card>
-  <Card title="Review loop" icon="table">
-    User reviews in a table, corrects failures and exports in one click to the internal format.
-  </Card>
-  <Card title="Observability loop" icon="activity">
-    Structured logs and validation allow auditing what was imported and how it was resolved.
-  </Card>
-</CardGroup>
+* **Real problem:** heterogeneous formats, mismatched units, packaging-change duplicates and ambiguous descriptions show up frequently in daily operations.
+* **Cost:** tens of minutes per order; ambiguity is the most frequent symptom, duplicates the most frustrating.
+* **Technical viability:** a catalog with multiple barcode columns + real orders confirm exact+barcode matching works; customer mapping from fiscal data is feasible.
+* **Explicit decision:** illegible photos out of the MVP (unreliable OCR; keep "ask for legible resend").
 
-## What Exists Today
+## 3. Next steps
 
-| Area | Status | Operational Meaning |
-| --- | --- | --- |
-| Documentation | Active on Mintlify | Product, technical and operations centralized. |
-| API | Go + PostgreSQL on Docker | Orchestrates validation, matching and persistence. |
-| Interface | React + TypeScript | Upload, review and manual editing. |
-| Catalog | PostgreSQL | Durable source of products and codes. |
-| Infrastructure | Docker Compose | Reproducible stack locally and in production. |
+| Area | Status | Next |
+|---|---|---|
+| Context & research | Complete | Keep updated |
+| Product (scope, proposition, MVP) | Defined | Refine with real usage |
+| Requirements (prioritization) | Grid complete | Stories, criteria and backlog |
+| UX (system, flows, prototype) | Defined | Wireframes and user tests |
+| Architecture | Defined (19 ADRs) | Spikes: real PDF, LLM, trigrams |
+| Development | Pending | Conventions, testing, CI/CD |
+| Domain data | Pending | Formats and sanitized catalog |
+| Management | Pending | Roadmap, sprints, risks |
 
-## Next Priorities
+## 4. Active risks and assumptions
 
-1. Validate end-to-end Excel import and code/barcode matching.
-2. Harden the API contract before the frontend depends heavily on it.
-3. Complete frontend/API integration with consistent loading and error states.
-4. Sync the OpenAPI spec in the docs repository.
-5. Define the bilingual documentation workflow before translating every page.
+* **Input quality:** if the customer sends an illegible photo, the MVP doesn't solve it — "ask for resend" flow.
+* **Unconfirmed unit-conversion table:** depends on per-product/customer mapping existing (stretch).
+* **LLM pipeline:** per-order cost/latency and commercial-data privacy to evaluate in spike.
+* **Free-tier cloud project:** inactivity pauses (mitigated with keep-alive) and bounded file retention.
+
+## 5. Standing decisions
+
+* No OCR in MVP; exact matching before barcode; ambiguity is detected, not guessed.
+* Managed auth (not homegrown); modular monolith + layers; separate repos; local dev + cloud prod.
+* LLM-sourced rows start in `revisar`; `ok` only when identical to catalog.

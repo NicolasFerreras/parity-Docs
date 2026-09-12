@@ -82,4 +82,4 @@ Ante cada decisión de diseño/comunicación/producto, preguntar:
 | Logotipo / claim lockup | `PARITY` mayúsculas si el lockup lo exige | `PARITY — Orden entra, pedido sale` |
 
 ---
-*Referencia visual y copy detallado: `design-system.md` (paleta/tipografía/logos) + `prototype.md` (hero/mensajes) + `user-flows.md` (flujo 8 nodos).*
+*Referencia visual y copy detallado: `design-system.md` (paleta/tipografía/logos) + `user-flows.md` (flujo 8 nodos + recorrido de usuario).*

@@ -84,8 +84,7 @@
               "en/docs/02-product/value-proposition",
               "en/docs/02-product/business-model-canvas",
               "en/docs/02-product/mvp-definition",
-              "en/docs/04-ux/user-flows",
-              "en/docs/04-ux/prototype"
+              "en/docs/04-ux/user-flows"
             ]
           },
           {
@@ -100,7 +99,14 @@
             "pages": [
               "en/docs/05-architecture/architecture",
               "en/docs/05-architecture/architecture-decisions",
-              "en/docs/05-architecture/api-design"
+              "en/docs/05-architecture/api-design",
+              "en/docs/05-architecture/data-model"
+            ]
+          },
+          {
+            "group": "Process",
+            "pages": [
+              "en/docs/08-project-management/como-trabajamos"
             ]
           }
         ]

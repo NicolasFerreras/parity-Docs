@@ -1,24 +1,44 @@
 ---
 title: "MVP Definition"
-description: "What the first version delivers."
 ---
 
-# MVP Definition
+# MVP Definition — Parity
 
-The MVP validates the end-to-end cycle with a real catalog and a usable review flow, without heavy infrastructure.
+> Public document. What the MVP must satisfy, which hypotheses it validates and which risks it takes.
 
-## Includes
+## 1. MVP statement
 
-* Excel/PDF upload and parsing with validation.
-* Exact code and barcode matching.
-* Ambiguity detection (no automatic resolution).
-* Review table with inline editing and export.
-* PostgreSQL persistence and operational documentation.
+Prove that a heterogeneous order (Excel/PDF/text) becomes a catalog-validated spreadsheet with exact+barcode matching, mapped customer and flagged ambiguity — cutting time from tens of minutes toward 2 min — **without replacing human judgment**.
 
-## Excludes
+## 2. Core vs. stretch vs. out
 
-* Photo OCR, audio or WhatsApp.
-* Semantic matching with AI.
-* Automatic ERP synchronization.
+- **Core (committed):** customer detection + exact/barcode matching + import/export + ambiguity detection.
+- **Stretch (if time allows):** free text (needs its own LLM pipeline), per-customer quantities, unit conversion, visible catalog.
+- **Out:** OCR on blurry photos.
 
-Success is measured in time per order and error rate avoided, not feature count.
+## 3. Hypotheses the MVP must validate
+
+| # | Hypothesis | How it's measured |
+|---|---|---|
+| H1 | Exact+barcode matching solves the top frustration (duplicates) | % of lines auto-matched with no intervention |
+| H2 | Detecting ambiguity (without resolving) is sufficient and reliable | % of ambiguities detected vs. missed |
+| H3 | Time per order drops under 5 min (target 2) | Measured with an operating user |
+| H4 | The operator keeps control and trusts it (no replacement feeling) | Post-use qualitative test |
+
+## 4. MVP risks and mitigations
+
+- **Scope risk:** mitigated with a drop rule (free text/ambiguity → v2).
+- **Unconfirmed unit-conversion table:** doesn't block the core.
+- **Input-quality dependency:** "ask for resend" fallback flow.
+- **LLM pipeline (PDF):** per-order cost/latency and privacy to evaluate in spike.
+
+## 5. Traceability
+
+```mermaid actions={true}
+flowchart LR
+    P[Problem] --> E[Evidence]
+    E --> F[Feature]
+    F --> M[This MVP]
+    M --> U[User stories]
+    U --> T[Tests]
+```

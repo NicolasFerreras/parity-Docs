@@ -25,7 +25,7 @@ Fin de relevamiento y descubrimiento → definición de producto y arquitectura.
 | Producto (alcance, propuesta, MVP) | Definido | Refinar con uso real |
 | Requisitos (priorización) | Grilla completa | Historias, criterios y backlog |
 | UX (sistema, flujos, prototipo) | Definido | Wireframes y tests con usuarios |
-| Arquitectura | Definida (18 ADRs) | Spikes: PDF real, LLM, trigramas |
+| Arquitectura | Definida (19 ADRs) | Spikes: PDF real, LLM, trigramas |
 | Desarrollo | Pendiente | Convenciones, testing, CI/CD |
 | Datos de dominio | Pendiente | Formatos y catálogo sanitizado |
 | Gestión | Pendiente | Roadmap, sprints, riesgos |
