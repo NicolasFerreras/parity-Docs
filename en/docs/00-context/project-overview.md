@@ -2,7 +2,7 @@
 title: "Parity Documentation"
 ---
 
-> Documentación operativa y de producto de la plataforma Parity y su infraestructura de apoyo.
+> Operational and product documentation for the Parity platform and its supporting infrastructure.
 
 Parity is a purchase order standardizer for distributors: it receives orders exactly as each customer sends them (Excel, PDF, photo, text), automatically matches them against the internal catalog, and makes them available on a spreadsheet-style dashboard for human review in seconds. It combines a web application, a backend (API), and an extraction pipeline with LLM assistance for difficult cases.
 
