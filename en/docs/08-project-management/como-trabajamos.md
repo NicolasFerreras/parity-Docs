@@ -6,6 +6,8 @@ title: "How We Work"
 
 > How Parity is built: specialized AI agents, coordinated by an orchestrator and supervised by people at every major step.
 
+**We rely** on AI because we understand the significance and importance of this tool in our industry. <br />We do **not delegate responsibilities, professional judgment, or decisions to it; we use it as a support tool.** Behind every prompt, every line of code, and every plan or action carried out by the AI models, there is a **human and a team responsible for validating, verifying, modifying, adding, or removing every detail.** No plan or even line of code will be implemented in Parity without first being **reviewed and approved by human and professional judgment.** We are in charge of Parity’s development; we are accountable for it, and therefore, **AI will never carry more weight than our word.**
+
 ```mermaid
 flowchart TD
 
