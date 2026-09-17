@@ -16,44 +16,44 @@ title: "Diseño de sistema"
 | **Variantes fondo sólido** (blanco / negro) | Cuando no se puede usar transparencia (mail, PDF) |
 | **Lockup final** | Master para imprenta / presentación |
 
-**Reglas pendientes por definir:**
-- [ ] Área de seguridad: _ej. `x = altura de la P` alrededor, mínimo 16px en digital_
-- [ ] Tamaño mínimo: _ej. 24px isotipo, 120px lockup horizontal_
-- [ ] Isotipo vs. lockup: cuándo usar cada uno (app bar vs. hero)
-- Fuente del logotipo: **League Spartan** (confirmada para logo, no definitiva para UI — ver §3)
-
 ## 2. Paleta
 
 **Colores confirmados:**
 
-| Token | HEX | Uso |
-|---|---|---|
-| `color-primary` | `#03F07C` | CTAs principales, highlight validado, acento éxito |
-| `color-primary-soft` | `#5DE9AA` | Hover, badges “match ok”, fondos sutiles, gráficos |
-| `color-surface-warm` | `#FFF9EC` | Fondo claro principal (alternativa a blanco puro, cálido) |
-| `color-accent-amber` | `#D5A129` | Alertas, “revisar”, warnings |
-| `color-ink` | `#000000` | Texto principal dark, íconos |
-
-**Sistema light / dark (adaptativo, no fijo):**
-
-- **Light:** `bg: #FFF9EC` / `surface: #FFFFFF` / `ink: #000000` / `primary: #03F07C`
-- **Dark:** `bg: #0A0A0A` (≈ negro) / `surface: #1A1A1A` / `ink: #FFF9EC` / `primary: #03F07C` (mantiene contraste)
-
-**Paleta complementaria pendiente:** definir 3 HEX adicionales si se necesitan para estados (error, info, disabled). Propuesta provisional:
-- `color-error: #E85D5D` / `color-info: #4A90E2` / `color-border: #E8E8E0` (a validar con dirección visual).
+| Primary | `#059669` | Botones, links, acentos |
+| --- | --- | --- |
+| Secondary | `#10b981` | Gradientes, hover states |
+| Button shadow | `#047857` | Borde/botón SpecularButton |
+| Accent bright | `#5DE9AA` | Acentos Brillantes |
+| Background | `#ffffff` | Fondo general |
+| Text primary | `#0b1220` | Texto principal |
+| Text secondary | `#6b7280` (gray-600) | Subtítulos, descripciones |
+| Text muted | `#9ca3af` (gray-500) | Labels pequeños |
+| Border | `#e5e7eb` (gray-200) | Bordes de secciones |
 
 ## 3. Tipografía
 
 **Logo:** League Spartan (confirmada, no obligatoria para UI).
 
-**Recomendación de combinación (propuesta, no definitiva):**
-- **Opción 1 (SaaS moderna):** `Inter Display 500` (headings) + `Inter 400 / DM Sans 500` (body/UI) — segura, legible en tablas densas.
-- **Opción 2 (Editorial + tech):** display serif (hero) + `Inter 400` (body) + grotesca (CTAs/badges).
-- **Opción 3 (Variable única, minimal):** variable para todo + tabular para datos.
+| **Fuente** | **Peso** | **Uso** |
+| --- | --- | --- |
+| **Inter** | 400 | Body, UI, texto general |
+| **DM Sans** | 500 | Headings, CTAs, badges (`.font-grotesque`) |
 
-> Decisión pendiente: elegir combinación final y testear en grilla Excel densa (legibilidad números/códigos). Documentar aquí el par final y pesos.
+| **Token** | **Tamaño** |
+| --- | --- |
+| Caption | `14px` |
+| Body | `17px` |
+| UI | `19px` |
+| H3 | `24px` |
+| H2 | `34px` |
+| H1 | `48px` |
 
-**Escala provisional:** `12 caption / 14 body / 16 ui / 20 h3 / 28 h2 / 40 h1` — inter 1.5.
+### **Altura de línea global**
+
+- Body: `1.6`
+- Headings: `1.3`
+- Hero h1: `1.05`
 
 ## 4. Dirección visual
 
@@ -80,4 +80,3 @@ Estado: **en investigación**.
 **Otros:** uploader drag&drop, mapeo cliente (CUIT/razón social → código), tolerancia a formatos heredados.
 
 ---
-*Próximo: definir HEX complementarios + elegir combinación tipográfica final y documentar área seguridad logo cuando dirección visual cierre.*

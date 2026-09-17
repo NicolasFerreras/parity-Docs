@@ -28,7 +28,7 @@ title: "Data Model"
 ## Data lifecycle
 
 ```mermaid actions={true}
-flowchart LR
+flowchart TD
     U[Upload Excel or PDF] --> S[Imported Storage]
     S --> O[orders and order_lines in review]
     O --> J{jobs}
