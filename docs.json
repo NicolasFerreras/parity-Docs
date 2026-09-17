@@ -21,96 +21,146 @@
       {
         "language": "es",
         "default": true,
-        "groups": [
+        "tabs": [
           {
-            "group": "Resumen",
-            "pages": [
-              "docs/00-context/project-overview",
-              "docs/00-context/project-status",
-              "docs/00-context/project-glossary"
+            "tab": "Resumen",
+            "groups": [
+              {
+                "group": "Resumen",
+                "pages": [
+                  "docs/00-context/project-overview",
+                  "docs/00-context/project-status",
+                  "docs/00-context/project-glossary"
+                ]
+              }
             ]
           },
           {
-            "group": "Producto",
-            "pages": [
-              "docs/02-product/scope",
-              "docs/02-product/product-definition",
-              "docs/02-product/value-proposition",
-              "docs/02-product/business-model-canvas",
-              "docs/02-product/mvp-definition",
-              "docs/04-ux/user-flows"
+            "tab": "Producto",
+            "groups": [
+              {
+                "group": "Producto",
+                "pages": [
+                  "docs/02-product/scope",
+                  "docs/02-product/product-definition",
+                  "docs/02-product/value-proposition",
+                  "docs/02-product/business-model-canvas",
+                  "docs/02-product/mvp-definition",
+                  "docs/04-ux/user-flows"
+                ]
+              }
             ]
           },
           {
-            "group": "Diseño",
-            "pages": [
-              "docs/04-ux/ux-ui-guidelines",
-              "docs/04-ux/design-system"
+            "tab": "Diseño",
+            "groups": [
+              {
+                "group": "Diseño",
+                "pages": [
+                  "docs/04-ux/ux-ui-guidelines",
+                  "docs/04-ux/design-system"
+                ]
+              }
             ]
           },
           {
-            "group": "Técnico",
-            "pages": [
-              "docs/05-architecture/architecture",
-              "docs/05-architecture/architecture-decisions",
-              "docs/05-architecture/api-design",
-              "docs/05-architecture/data-model",
-              "untitled-page",
-              "untitled-page-2"
+            "tab": "Tecnico",
+            "groups": [
+              {
+                "group": "Técnico",
+                "pages": [
+                  "docs/05-architecture/architecture",
+                  "docs/05-architecture/architecture-decisions",
+                  "docs/05-architecture/api-design",
+                  "docs/05-architecture/data-model",
+                  "untitled-page",
+                  "untitled-page-2"
+                ]
+              }
             ]
           },
           {
-            "group": "Proceso",
-            "pages": [
-              "docs/08-project-management/como-trabajamos"
+            "tab": "Proceso",
+            "groups": [
+              {
+                "group": "Proceso",
+                "pages": [
+                  "docs/08-project-management/como-trabajamos"
+                ]
+              }
             ]
           }
         ]
       },
       {
         "language": "en",
-        "groups": [
+        "tabs": [
           {
-            "group": "Overview",
-            "pages": [
-              "en/docs/00-context/project-overview",
-              "en/docs/00-context/project-status",
-              "en/docs/00-context/project-glossary"
+            "tab": "Overview",
+            "groups": [
+              {
+                "group": "Overview",
+                "pages": [
+                  "en/docs/00-context/project-overview",
+                  "en/docs/00-context/project-status",
+                  "en/docs/00-context/project-glossary"
+                ]
+              }
             ]
           },
           {
-            "group": "Product",
-            "pages": [
-              "en/docs/02-product/scope",
-              "en/docs/02-product/product-definition",
-              "en/docs/02-product/value-proposition",
-              "en/docs/02-product/business-model-canvas",
-              "en/docs/02-product/mvp-definition",
-              "en/docs/04-ux/user-flows"
+            "tab": "Product",
+            "groups": [
+              {
+                "group": "Product",
+                "pages": [
+                  "en/docs/02-product/scope",
+                  "en/docs/02-product/product-definition",
+                  "en/docs/02-product/value-proposition",
+                  "en/docs/02-product/business-model-canvas",
+                  "en/docs/02-product/mvp-definition",
+                  "en/docs/04-ux/user-flows"
+                ]
+              }
             ]
           },
           {
-            "group": "Design",
-            "pages": [
-              "en/docs/04-ux/ux-ui-guidelines",
-              "en/docs/04-ux/design-system"
+            "tab": "Design",
+            "groups": [
+              {
+                "group": "Design",
+                "pages": [
+                  "en/docs/04-ux/ux-ui-guidelines",
+                  "en/docs/04-ux/design-system"
+                ]
+              }
             ]
           },
           {
-            "group": "Technical",
-            "pages": [
-              "en/docs/05-architecture/architecture",
-              "en/docs/05-architecture/architecture-decisions",
-              "en/docs/05-architecture/api-design",
-              "en/docs/05-architecture/data-model",
-              "untitled-page-4",
-              "untitled-page-3"
+            "tab": "Technical",
+            "groups": [
+              {
+                "group": "Technical",
+                "pages": [
+                  "en/docs/05-architecture/architecture",
+                  "en/docs/05-architecture/architecture-decisions",
+                  "en/docs/05-architecture/api-design",
+                  "en/docs/05-architecture/data-model",
+                  "untitled-page-4",
+                  "untitled-page-3"
+                ]
+              }
             ]
           },
           {
-            "group": "Process",
-            "pages": [
-              "en/docs/08-project-management/como-trabajamos"
+            "tab": "Process",
+            "groups": [
+              {
+                "group": "Process",
+                "pages": [
+                  "en/docs/08-project-management/como-trabajamos"
+                ]
+              }
             ]
           }
         ]
