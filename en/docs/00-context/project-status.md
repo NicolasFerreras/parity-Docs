@@ -8,7 +8,7 @@ title: "Project Status"
 
 ## 1. Current Phase
 
-**Documentation complete → ready for development** The entire definition phase is complete: requirements, architecture, UX/UI, testing, development environment, infrastructure, and deployment. The problem has been validated as real and pressing, the technology stack has been defined, and the remaining 9 stubs are for management/tracking (they do not block coding).
+**Documentation complete → Actual phase: Development** The entire definition phase is complete: requirements, architecture, UX/UI, testing, development environment, infrastructure, and deployment. The problem has been validated as real and pressing, the technology stack has been defined, and the remaining 9 stubs are for management/tracking (they do not block coding).
 
 ## 2. What Has Been Validated
 
@@ -38,7 +38,7 @@ title: "Project Status"
 | Infrastructure and tools | ✅ Documented | — |
 | Domain data | ✅ Formats and catalog | Sanitize real catalog for testing |
 | Management (roadmap, sprints, risks) | ⏸️ Stubs pending | Complete while developing |
-| **Development** | 🔜 **Next phase** | Start US1 (Excel order upload) |
+| **Development** | 🔜 **Current phase** | Start US1 (Excel order upload) |
 
 ## 4. Active risks and assumptions
 

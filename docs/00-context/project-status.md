@@ -8,7 +8,7 @@ title: "Estado del proyecto"
 
 ## 1. Fase actual
 
-**Documentación completa → listos para desarrollo** Toda la fase de definición está cerrada: requisitos, arquitectura, UX/UI, testing, entorno de desarrollo, infraestructura y deploy. El problema está validado como real y doloroso, el stack tecnológico está definido, y los 9 stubs restantes son de gestión/tracking (no bloquean el codeo).
+**Documentación completa →Fase actual: Desarrollo** Toda la fase de definición está cerrada: requisitos, arquitectura, UX/UI, testing, entorno de desarrollo, infraestructura y deploy. El problema está validado como real y doloroso, el stack tecnológico está definido, y los 9 stubs restantes son de gestión/tracking (no bloquean el codeo).
 
 ## 2. Qué está validado
 
@@ -38,7 +38,7 @@ title: "Estado del proyecto"
 | Infraestructura y herramientas | ✅ Documentada | — |
 | Datos de dominio | ✅ Formatos y catálogo | Sanitizar catálogo real para testing |
 | Gestión (roadmap, sprints, riesgos) | ⏸️ Stubs pendientes | Completar mientras se desarrolla |
-| **Desarrollo** | 🔜 **Siguiente fase** | Arrancar US1 (carga de orden Excel) |
+| **Desarrollo** | 🔜 **Fase actual** | Arrancar US1 (carga de orden Excel) |
 
 ## 4. Riesgos y supuestos activos
 
