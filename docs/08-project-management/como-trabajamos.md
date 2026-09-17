@@ -6,12 +6,7 @@ title: "Como trabajamos"
 
 > La construcción de Parity se apoya en un equipo de agentes de IA especializados, coordinados por un orquestador y supervisados por personas en cada paso importante.
 
-**Nos apoyamos en el uso de IA** porque sabemos el peso y la importancia de esta herramienta en nuestra industria. **No delegados responsabilidades, criterio profesional o decisiones a ella, la utilizamos como apoyo.** Detrás de cada prompt, cada línea de código y cada plan o acción de los modelos de IA **hay un humano y un equipo detrás, encargado de validar y verificar, modificar, agregar o quitar cada aspecto detallado**, ningún plan o hasta linea de código será implementada en Parity sin que el **criterio humano y profesional haya actuado sobre el mismo.** Nos hacemos cargo del desarrollo de Parity, somos sus responsables y por tanto, **la IA nunca tendrá más peso que nuestra palabra**
-
-%% Flujo completo de la arquitectura — Parity
-%% Basado en: arquitectura_agentes_skills_workflows_proyecto.md
-%% Simplificación: el Human Gate (seccion 4) aplica en TODAS las transiciones,
-%% acá se marcan solo los puntos más críticos para no saturar el diagrama.
+**Nos apoyamos en la IA** porque comprendemos el significado y la importancia de esta herramienta en nuestro sector.<br />**No le delegamos responsabilidades, criterio profesional ni decisiones; la utilizamos como herramienta de apoyo.** Detrás de cada prompt, cada línea de código y cada plan o acción llevada a cabo por los modelos de IA, hay una **persona y un equipo responsables de validar, verificar, modificar, añadir o eliminar cada detalle.** Ningún plan, ni siquiera una línea de código, se implementará en Parity sin haber sido **revisado y aprobado previamente mediante el criterio humano y profesional.** Nosotros estamos al frente del desarrollo de Parity; somos responsables de él y, por lo tanto, **la IA nunca tendrá más peso que nuestra palabra.**
 
 ```mermaid
 flowchart TD
