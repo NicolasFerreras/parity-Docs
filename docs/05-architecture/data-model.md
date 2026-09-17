@@ -28,7 +28,7 @@ title: "Modelo de datos"
 
 ## Ciclo de vida del dato
 
-```mermaid actions={true}
+```mermaid placement="top-right" actions={true}
 flowchart LR
     U[Upload Excel o PDF] --> S[Storage importadas]
     S --> O[orders y order_lines en revision]
