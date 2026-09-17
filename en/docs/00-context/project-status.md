@@ -6,29 +6,39 @@ title: "Project Status"
 
 > Public document: product status (what exists, what's next), with no case-specific or academic-process information.
 
-## 1. Current phase
+## 1. Current Phase
 
-Discovery done → product and architecture definition. The problem is validated as real and painful (lost operating time, 4 recurring symptoms, medium-high frustration, widely recognized room for improvement) and the proposed matching as viable with real data.
+**Documentation complete → ready for development** The entire definition phase is complete: requirements, architecture, UX/UI, testing, development environment, infrastructure, and deployment. The problem has been validated as real and pressing, the technology stack has been defined, and the remaining 9 stubs are for management/tracking (they do not block coding).
 
-## 2. What's validated
+## 2. What Has Been Validated
 
-* **Real problem:** heterogeneous formats, mismatched units, packaging-change duplicates and ambiguous descriptions show up frequently in daily operations.
-* **Cost:** tens of minutes per order; ambiguity is the most frequent symptom, duplicates the most frustrating.
-* **Technical viability:** a catalog with multiple barcode columns + real orders confirm exact+barcode matching works; customer mapping from fiscal data is feasible.
-* **Explicit decision:** illegible photos out of the MVP (unreliable OCR; keep "ask for legible resend").
+* **Real-world problem:** Inconsistent formats, different units, duplicates due to packaging changes, and ambiguous descriptions frequently arise in day-to-day operations.
+* **Cost:** Tens of minutes per order; ambiguity is the most frequent issue, and duplicates are the most frustrating.
+* **Technical feasibility:** A catalog with multiple barcode columns + real orders confirm that exact matching via barcode works; mapping customers by tax ID is feasible.
+* **Explicit decision:** Illegible photos are excluded from the MVP (OCR is unreliable; the policy of “requesting a legible resend” remains in place).
+* **Technology stack:** Go + React/TypeScript + PostgreSQL. Backend on Render, frontend on Cloudflare Pages, DB + Auth + Storage on Supabase.
+* **Requirements:** 10 functional requirements (R-001 to R-010), 5 non-functional requirements (R-NF01 to R-NF05), 10 business rules (RB-001 to RB-010).
+* **User Stories:** 9 stories (US1 to US9) with Given/When/Then acceptance criteria and prioritization using the F1-F9 grid.
+* **Architecture:** 18 ADRs, modular monolith (Handler → Service → Repository), separate repositories (Go backend / React frontend).
+* **Testing:** Documented backend strategy (150–200 tests, 4 quadrants) and frontend strategy (24 tests, FE-01 through FE-24).
+* **Development environment:** Local setup with Docker (Supabase CLI), Makefile with standardized commands, documented environment variables.
+* **Deployment:** Render (backend) + Cloudflare Pages (frontend) + cron-job.org (keep-alive). CI/CD with GitHub Actions.
 
-## 3. Next steps
+## 3. Next Steps
 
 | Area | Status | Next |
 |---|---|---|
-| Context & research | Complete | Keep updated |
-| Product (scope, proposition, MVP) | Defined | Refine with real usage |
-| Requirements (prioritization) | Grid complete | Stories, criteria and backlog |
-| UX (system, flows, prototype) | Defined | Wireframes and user tests |
-| Architecture | Defined (19 ADRs) | Spikes: real PDF, LLM, trigrams |
-| Development | Pending | Conventions, testing, CI/CD |
-| Domain data | Pending | Formats and sanitized catalog |
-| Management | Pending | Roadmap, sprints, risks |
+| Context and Research | ✅ Complete | Keep up to date |
+| Product (scope, proposal, MVP) | ✅ Defined | Refine through real-world use |
+| Requirements (user stories, criteria, backlog) | ✅ Complete | Traceability: R→US→TC→Impl |
+| UX (system, flows, guidelines) | ✅ Defined | Wireframes and user testing |
+| Architecture (18 ADRs, diagrams) | ✅ Defined | Spikes: real PDF, LLM, trigrams |
+| Testing (backend + frontend) | ✅ Strategy defined | Implement tests according to matrix |
+| Environment and deployment | ✅ Configured | Initial local setup + CI/CD |
+| Infrastructure and tools | ✅ Documented | — |
+| Domain data | ✅ Formats and catalog | Sanitize real catalog for testing |
+| Management (roadmap, sprints, risks) | ⏸️ Stubs pending | Complete while developing |
+| **Development** | 🔜 **Next phase** | Start US1 (Excel order upload) |
 
 ## 4. Active risks and assumptions
 
@@ -40,5 +50,6 @@ Discovery done → product and architecture definition. The problem is validated
 ## 5. Standing decisions
 
 * No OCR in MVP; exact matching before barcode; ambiguity is detected, not guessed.
-* Managed auth (not homegrown); modular monolith + layers; separate repos; local dev + cloud prod.
+* Managed authentication (not self-hosted)
+* Modular monolith + layers; separate repositories; local dev + staging + prod in the cloud.
 * LLM-sourced rows start in `revisar`; `ok` only when identical to catalog.
