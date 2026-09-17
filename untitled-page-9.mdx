@@ -1,0 +1,45 @@
+---
+title: "Frontend Testing"
+---
+
+# Testing Strategy — Frontend Parity
+
+> Testing strategy for the frontend (React + TypeScript). Defines the 24 essential tests, prioritization, tools, and coverage. Separate from the backend to ensure team independence.
+
+## Testing Stack — Frontend
+
+| Layer | Tool | Purpose |
+| --- | --- | --- |
+| **Unit** | `Vitest` + `@testing-library/react` | Component tests based on behavior, not implementation |
+| **Integration** | `MSW` (Mock Service Worker) | Network-level API mocking, reusable in unit and E2E tests |
+| **E2E** | `Playwright` | Complete workflows in a real browser (1 critical test) |
+| **Coverage** | `Vitest + @vitest/coverage-v8` | Code coverage with the V8 provider |
+| **Interactions** | `@testing-library/user-event` | Simulates real user clicks, typing, and dragging |
+| **Basic A11y** | `jest-axe` | Automatic detection of accessibility issues (post-MVP) |
+| **CI** | GitHub Actions | Pipeline: lint + type check + test + coverage on every PR |
+
+## 1. Objective and Scope
+
+To validate that the Parity frontend delivers a functional, fast, and reliable user experience for the employee processing orders. The frontend is the presentation layer—the business logic resides in the backend.
+
+**Guiding principle:** Frontend tests DO NOT replicate what the backend already covers. The frontend tests how the UI **reacts** to data, not how it **processes** it.
+
+### What This File Covers
+
+| What | How Many |
+| --- | --- |
+| Essential tests (FE-01 to FE-24) | 24 tests |
+| Unit tests | 10 |
+| Integration tests | 10 |
+| E2E tests | 1 (full flow) |
+| Performance tests | 2 (UI SLAs) |
+| Target coverage | ≥70% in critical code |
+
+## 2. Breakdown by quadrant
+
+| Quadrant | Tests | % | What it covers |
+| --- | --- | --- | --- |
+| **No-brainers** | 13 | 54% | Upload, grid, statuses, editing, export, CRUD |
+| **Big Bets** | 7 | 29% | Candidates, polling, alerts |
+| **Utilities** | 4 | 17% | Catalog, pagination |
+| **Unwise** | 0 | 0% | Post-MVP (accessibility, responsiveness, animations) |

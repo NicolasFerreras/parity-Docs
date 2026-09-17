@@ -23,6 +23,6 @@ title: "Decisiones de Arquitectura"
 - **Async sin Redis ni Rabbit:** tabla de jobs en PG + workers en el proceso (el cuello es el LLM, no Go). Dashboard con polling de estado.
 - **Retención:** importado efímero (se borra al procesar), exportado 14 días por tarea nocturna, registros SQL siempre (auditoría).
 - **Registro y SMTP:** auto-registro con rol base operador (admin promueve) + Resend para emails de bienvenida.
-- **Errores y observabilidad:** Sentry desde día 1; dashboards propios en v2.
-- **Tier y secretos:** plan gratuito con ping keep-alive; secretos en variables del servicio; sin staging (local + prod); dominios por defecto.
+- **Errores y observabilidad:** Sentry desde día 1; dashboards propios en v2.¡
+- **Tier y secretos:** plan gratuito con ping keep-alive; secretos en variables del servicio; staging = local (Supabase CLI + Docker); producción = nube (Supabase + Render + Cloudflare); dominios por defecto.
 - **Sin bot ni ingesta automática:** bot conversacional descartado; MVP solo carga manual. La ingesta automática futura requiere decisión propia.

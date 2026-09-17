@@ -1,0 +1,79 @@
+---
+title: "Infrastructure and Tools"
+---
+
+> Complete technology stack: languages, frameworks, cloud services, testing tools, and deployment infrastructure. Quick reference guide.
+
+## Core Stack
+
+| Technology | Description | Reason |
+| --- | --- | --- |
+| **Go 1.22+** | Backend language, HTTP API, business logic, order processing | Native performance, native concurrency (goroutines), simple binary, stable ecosystem for REST APIs |
+| **React + TypeScript** | Frontend SPA, forms, order grid, dashboard | Mature ecosystem, static typing (TypeScript), reusable components, natural integration with REST APIs |
+| **PostgreSQL** | Primary relational database | Advanced extensions (`pg_trgm` for fuzzy search), maturity, reliability, free tier on Supabase |
+
+## Cloud Services
+
+| Service | Description | Reason |
+| --- | --- | --- |
+| **Supabase Cloud** | PostgreSQL + Auth + Storage in production | Managed authentication (proprietary JWT concentrates risk), storage for Excel/PDF files, generous free tier, PostgreSQL with extensions |
+| **Render** | Backend API deployment (Docker web service) | Free tier, automatic deployment from GitHub, native Docker support, built-in health checks |
+| **Cloudflare Pages** | SPA frontend deployment | Unlimited free tier, global CDN, automatic deployment from GitHub, fast builds |
+| **Resend** | Sending transactional emails (welcome messages, notifications) | Simple API, free tier (100 emails/day), no SMTP setup required, great for an MVP |
+
+## Development Tools
+
+| Tool | Description | Reason |
+| --- | --- | --- |
+| **Docker Desktop** | Containers for local DB (Supabase CLI uses it internally) | Isolates PostgreSQL from your machine, replicates the production environment, no need to install PG manually |
+| **Supabase CLI** | Sets up DB + Auth + local storage in Docker | Exact replica of Supabase Cloud locally, without configuring each service separately |
+| **Make** | Automated commands (`make dev`, `make test`, `make lint`) | Standard in Go projects, a single command for each task, no scattered bash scripts |
+
+## Backend Tools
+
+| Tool | Description | Reason |
+| --- | --- | --- |
+| **Gin** | HTTP framework for Go | Fast routing, native middleware, community-driven, lightweight for REST APIs |
+| **Goose** | Versioned SQL migrations | Simple, no extra dependencies, works with any PostgreSQL, status tracking |
+| **excelize** | Parsing Excel files (.xlsx) in Go | Standard library for Excel in Go, full support for cells/formulas/sheets |
+| **golangci-lint** | Linting for Go | Combines multiple linters into one, central configuration, fast in CI |
+
+## Frontend Tools
+
+| Tool | Description | Reason |
+| --- | --- | --- |
+| **Vite** | Dev server and build tool | Instant hot-reload, fast builds, minimal configuration, native TypeScript support |
+| **ESLint** | Linting for TypeScript/JavaScript | Industry standard, configurable rules, integration with VS Code |
+| **MSW (Mock Service Worker)** | API mock for testing | Mocks at the network level (not internally), more realistic tests, same API in dev and test |
+| **Axios** | HTTP client for frontend | Interceptors for auth, error handling, request cancellation, more comprehensive than native fetch |
+
+## Testing Tools
+
+| Tool | Description | Reason |
+| --- | --- | --- |
+| **Go test** | Unit and integration testing for Go | Native to Go, no extra dependencies, table-driven tests, built-in benchmarks |
+| **Vitest** | Unit testing for React/TypeScript | Vite-compatible configuration, fast, Jest-like API, native ESM support |
+| **Playwright** | End-to-end (E2E) testing in the browser | Multi-browser (Chromium, Firefox, WebKit), auto-wait, tracing, visual reports |
+| **pgTAP** | Referential integrity tests in PostgreSQL | DB tests via SQL; verifies constraints, triggers, and RLS without Go code |
+
+## Deployment Infrastructure
+
+| Component | Local (Development) | Production |
+| --- | --- | --- |
+| **Backend** | `go run` | Render Web Service |
+| **Frontend** | `npm run dev` | Cloudflare Pages |
+| **DB** | Supabase CLI in Docker (:5432) | Supabase Cloud |
+| **Auth** | Local Supabase CLI (:54321) | Supabase Cloud |
+| **Storage** | Local Supabase CLI (:54322) | Supabase Cloud |
+| **Keep-alive** | N/A | cron-job.org (ping /healthz every 14 min) |
+| **Errors** | Terminal logs | Sentry |
+
+## CI/CD
+
+| Component | Details |
+| --- | --- |
+| **Platform** | GitHub Actions |
+| **Triggers** | PR to main (tests) + merge to main (tests + deploy) |
+| **Backend deploy** | Build → push to Render (automatic webhook) |
+| **Frontend deploy** | Build → push to Cloudflare Pages (automatic) |
+| **Migrations** | Automatic `goose up` on deploy |

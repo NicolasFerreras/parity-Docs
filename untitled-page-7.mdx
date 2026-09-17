@@ -1,0 +1,79 @@
+---
+title: "Infraestructura y Herramientas — Parity"
+---
+
+> Stack tecnológico completo: lenguajes, frameworks, servicios cloud, herramientas de testing, y infraestructura de deploy. Documento de referencia rápida.
+
+## Stack Principal
+
+| Tecnología | Descripción | Razón |
+| --- | --- | --- |
+| **Go 1.22+** | Lenguaje del backend, API HTTP, lógica de negocio, procesamiento de órdenes | Rendimiento nativo, concurrency nativa (goroutines), binario simple, ecosistema estable para APIs REST |
+| **React + TypeScript** | Frontend SPA, formularios, grilla de órdenes, dashboard | Ecosistema maduro, tipado estático (TypeScript), componentes reutilizables, integración natural con APIs REST |
+| **PostgreSQL** | Base de datos relacional principal | Extensiones avanzadas (`pg_trgm` para búsqueda fuzzy), madurez, fiabilidad, free tier en Supabase |
+
+## Servicios Cloud
+
+| Servicio | Descripción | Razón |
+| --- | --- | --- |
+| **Supabase Cloud** | PostgreSQL + Auth + Storage en producción | Auth gestionado (JWT propio concentra riesgo), Storage para archivos Excel/PDF, free tier generoso, PG con extensiones |
+| **Render** | Deploy del backend API (web service Docker) | Free tier, deploy automático desde GitHub, Docker nativo, health checks integrados |
+| **Cloudflare Pages** | Deploy del frontend SPA | Free tier ilimitado, CDN global, deploy automático desde GitHub, builds rápidos |
+| **Resend** | Envío de emails transaccionales (bienvenida, notificaciones) | API simple, free tier (100 emails/día), sin setup de SMTP, bonito para MVP |
+
+## Herramientas de Desarrollo
+
+| Herramienta | Descripción | Razón |
+| --- | --- | --- |
+| **Docker Desktop** | Contenedores para DB local (Supabase CLI lo usa internamente) | Aísla PostgreSQL de tu máquina, reproduce entorno de prod, sin instalar PG manualmente |
+| **Supabase CLI** | Levanta DB + Auth + Storage local en Docker | Replica exacta de Supabase Cloud en local, sin configurar cada servicio por separado |
+| **Make** | Comandos automatizados (`make dev`, `make test`, `make lint`) | Estándar en proyectos Go, un solo comando para cada tarea, sin scripts bash dispersos |
+
+## Herramientas de Backend
+
+| Herramienta | Descripción | Razón |
+| --- | --- | --- |
+| **Gin** | Framework HTTP para Go | Routing rápido, middleware nativo, community-driven, liviano para APIs REST |
+| **Goose** | Migraciones SQL versionadas | Simple, sin dependencias extra, funciona con cualquier PG, tracking de estado |
+| **excelize** | Parsing de archivos Excel (.xlsx) en Go | Librería estándar para Excel en Go, soporte completo de celdas/formulas/hojas |
+| **golangci-lint** | Linting para Go | Agrega múltiples linters en uno, configuración central, rápido en CI |
+
+## Herramientas de Frontend
+
+| Herramienta | Descripción | Razón |
+| --- | --- | --- |
+| **Vite** | Dev server y build tool | Hot-reload instantáneo, build rápido, configuración mínima, soporte TypeScript nativo |
+| **ESLint** | Linting para TypeScript/JavaScript | Estándar de la industria, reglas configurables, integración con VS Code |
+| **MSW (Mock Service Worker)** | Mock de API para tests | Mockea en nivel de red (no interno), tests más realistas, misma API en dev y test |
+| **Axios** | Cliente HTTP para frontend | Interceptors para auth, manejo de errores, cancelación de requests, más completo que fetch nativo |
+
+## Herramientas de Testing
+
+| Herramienta | Descripción | Razón |
+| --- | --- | --- |
+| **Go test** | Testing unitario e integración para Go | Nativo de Go, sin dependencias extra, table-driven tests, benchmarks integrados |
+| **Vitest** | Testing unitario para React/TypeScript | Config compatible con Vite, rápido, API similar a Jest, soporte ESM nativo |
+| **Playwright** | Testing E2E (end-to-end) en navegador | Multi-browser (Chromium, Firefox, WebKit), auto-wait, tracing, reports visuales |
+| **pgTAP** | Tests de integridad referencial en PostgreSQL | Tests de DB desde SQL, verifica constraints, triggers, RLS sin código Go |
+
+## Infraestructura de Deploy
+
+| Componente | Local (Desarrollo) | Producción |
+| --- | --- | --- |
+| **Backend** | `go run` | Render Web Service |
+| **Frontend** | `npm run dev` | Cloudflare Pages |
+| **DB** | Supabase CLI en Docker (:5432) | Supabase Cloud |
+| **Auth** | Supabase CLI local (:54321) | Supabase Cloud |
+| **Storage** | Supabase CLI local (:54322) | Supabase Cloud |
+| **Keep-alive** | N/A | cron-job.org (ping /healthz c/14 min) |
+| **Errores** | Logs en terminal | Sentry |
+
+## CI/CD
+
+| Componente | Detalle |
+| --- | --- |
+| **Plataforma** | GitHub Actions |
+| **Triggers** | PR a main (tests) + merge a main (tests + deploy) |
+| **Backend deploy** | Build → push a Render (webhook automático) |
+| **Frontend deploy** | Build → push a Cloudflare Pages (automático) |
+| **Migraciones** | `goose up` automático al deploy |

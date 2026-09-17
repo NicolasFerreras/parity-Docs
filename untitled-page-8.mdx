@@ -1,0 +1,84 @@
+---
+title: "Backend Testing"
+---
+
+# Backend Testing Strategy — Parity
+
+> A quantitative, a preliminary testing strategy, recalibrated based on already-approved requirements, business rules, and user stories. It defines test volumes, prioritization, SLAs, and exit criteria. It does not describe specific test cases
+
+## Testing Stack — Backend
+
+| Layer | Tool | Purpose |
+| --- | --- | --- |
+| **Unit** | `testing` (Go stdlib) + `testify` | Pure logic unit tests: matching, parsing, validations, business rules |
+| **Integration** | `testcontainers-go` | Live PostgreSQL database in Docker for integration tests |
+| **API** | `httptest` (Go stdlib) | Testing HTTP endpoints with simulated requests |
+| **Coverage** | `go test -cover` + `go test -coverprofile` | Built-in code coverage |
+| **Performance** | `go test -bench` | Native Go benchmarks for matching, upload, and export |
+| **Lint** | `golangci-lint` | Static analysis of Go code |
+| **CI** | GitHub Actions | Pipeline: test + build + lint + security on every PR |
+
+## 1. Objective and Scope
+
+Validate the core features of the MVP: customer detection, exact and barcode-based matching, Excel import and export, ambiguity detection, error alerts, and sufficient performance to deliver on the promise of reducing processing time from ~30 min to \<2 min per order.
+
+## 2. Estimated Volumes by Level
+
+| Level | Estimated Range | Purpose |
+| --- | --- | --- |
+| Unit-level | 50–55 | Excel parsing, normalization, exact/barcode/trigram matching, validations, RB-001 to RB-010 |
+| API | 32–38 | JSON contracts, happy path + errors per endpoint, \\\`\\\{code, message\\\}\\\` codes, pagination, auth, permissions |
+| Integration | 15–20 | Upload→lines→catalog→export flow, matching with live DB, asynchronous polling jobs |
+| E2E | 6–8 | Complete end-to-end flows: upload→review→edit→export in a full production environment |
+| Acceptance | 8–12 | MVP hypotheses H1–H4 with a live user (time, reliability, human oversight) |
+| Performance | 8–12 | Matching \<200 ms/line, upload \<10 s, export \<5 s, dashboard \<1 s, concurrency |
+| Regression | 25–35 | Reusable subset of unit tests, API tests, and integration tests for each change |
+| Smoke | 6–10 | \\\`/healthz\\\`, minimal upload, listing, export, delegated login |
+| **TOTAL** | ~150–200 | Approximate total; not a cap or contractual commitment |
+
+## 3. Effectiveness Rate: 5 Metrics
+
+| # | Metric | What it measures | Target |
+| --- | --- | --- | --- |
+| 1 | \\\*\\\*% Pass\\\*\\\* | Tests that pass out of those executed, by level and globally | 100% at merge for blocking levels (see §5) |
+| 2 | \\\*\\\*Parsing and Matching Coverage\\\*\\\* | Lines of code and branches covered by normalization, exact, slash, and ambiguity detection | ≥70% minimum, 80% target |
+| 3 | \\\*\\\*Defect Detection\\\*\\\* | Defects found in testing compared to the total (testing + production) | 0 serious FAILs pending; increasing trend in early detection |
+| 4 | \\\*\\\*Product Effectiveness\\\*\\\* | % of lines auto-matched without intervention, false positives (FP), and false negatives (FN) | Auto-match ≥70% (target 80%+); FP \<2% (target \<1%); FN tending toward zero |
+| 5 | \\\*\\\*Performance\\\*\\\* | Matching, upload, export, and dashboard load times | See SLAs in §10 |
+
+Metrics 4 and 5 are directly linked to H1–H3 of the MVP: matching must be both fast AND accurate for the 30→2 min promise to be fulfilled.
+
+## 4. Merge and Release Thresholds
+
+### Merge to `main`
+
+| Condition | Threshold |
+| --- | --- |
+| Unit, API, and integration tests pass | 100% |
+| Parsing and matching coverage | ≥70% minimum, 80% target |
+| Open critical defects | 0 critical FAILs |
+| CI (tests, build, lint, security) | Pass |
+
+### Release to staging and production
+
+| Condition | Threshold |
+| --- | --- |
+| Smoke, E2E, and acceptance tests | 100% pass |
+| Auto-match on synthetic sample | ≥70% minimum, 80%+ target |
+| False positives | \<2% maximum, \<1% target |
+| Time per order | From tens of minutes down to 2 min (H3); less than 5 min as the acceptable floor |
+| \\\*\\\*Performance\\\*\\\* | All SLAs in §10 met; if average time >10 min, \\\*\\\*no release\\\*\\\* |
+| Operator confidence | Post-use qualitative test with no sense that a replacement is needed (H4) |
+
+No release proceeds with a critical FAIL open or a performance SLA unmet. The final decision goes through the Human Gate.
+
+## 5. Test Prioritization Matrix
+
+Tests are prioritized using the same logic as the Product Prioritization Matrix (F1–F9): what provides the most value with the least effort comes first.
+
+| Quadrant | % of Total | Tests | What It Covers | When |
+| --- | --- | --- | --- | --- |
+| **No-brainers** | 45% | 70–90 | Exact matching, bar matching, customer detection, Excel import, export, RB-001/002/006/007/008/009 | Sprint 1–2 |
+| **Big Bets** | 35% | 50–70 | Ambiguity, alerts, trigrams, grid editing, LLM review, **performance** | Sprint 2–3 |
+| **Utilities** | 15% | 23–30 | Quantity translation, visible catalog, Excel edge cases, audit log | Sprint 3–4 |
+| **Unwise** | 5% | 5–8 | Full LLM, formal security, 14-day retention | Post-MVP |

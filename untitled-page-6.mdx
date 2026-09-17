@@ -1,0 +1,45 @@
+---
+title: "Frontend Testing"
+---
+
+# Estrategia de Testing — Frontend Parity
+
+> Estrategia de testing para el frontend (React + TypeScript). Define los 24 tests esenciales, priorización, herramientas y cobertura. Separada del backend para independencia de equipos.
+
+## Stack de Testing — Frontend
+
+| Capa | Herramienta | Propósito |
+| --- | --- | --- |
+| **Unit** | `Vitest` + `@testing-library/react` | Tests de componentes por comportamiento, no por implementación |
+| **Integración** | `MSW` (Mock Service Worker) | Mock de API a nivel de red, reutilizable en unit y E2E |
+| **E2E** | `Playwright` | Flujos completos en navegador real (1 test crítico) |
+| **Coverage** | `Vitest + @vitest/coverage-v8` | Cobertura de código con provider v8 |
+| **Interacciones** | `@testing-library/user-event` | Simula clicks, typing, drag real del usuario |
+| **A11y básico** | `jest-axe` | Detección automática de issues de accesibilidad (post-MVP) |
+| **CI** | GitHub Actions | Pipeline: lint + typecheck + test + coverage en cada PR |
+
+## 1. Objetivo y alcance
+
+Validar que el frontend de Parity entrega una experiencia de usuario funcional, rápida y confiable para el empleado que procesa órdenes. El frontend es la capa de presentación — la lógica de negocio vive en el backend.
+
+**Principio rector:** los tests de frontend NO replican lo que el backend ya cubre. El frontend testea cómo la UI **reacciona** a los datos, no cómo los **procesa**.
+
+### Qué cubre este archivo
+
+| Qué | Cuánto |
+| --- | --- |
+| Tests esenciales (FE-01 a FE-24) | 24 tests |
+| Unit tests | 10 |
+| Integration tests | 10 |
+| E2E tests | 1 (flujo completo) |
+| Performance tests | 2 (SLAs de UI) |
+| Cobertura objetivo | ≥70% en código crítico |
+
+## 2. Distribución por cuadrante
+
+| Cuadrante | Tests | % | Qué cubre |
+| --- | --- | --- | --- |
+| **No-brainers** | 13 | 54% | Upload, grilla, estados, edición, export, CRUD |
+| **Big Bets** | 7 | 29% | Candidatos, polling, alertas |
+| **Utilities** | 4 | 17% | Catálogo, paginación |
+| **Unwise** | 0 | 0% | Post-MVP (accesibilidad, responsive, animaciones) |

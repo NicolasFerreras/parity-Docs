@@ -71,12 +71,20 @@
                 "pages": [
                   "docs/05-architecture/architecture",
                   "docs/05-architecture/architecture-decisions",
+                  "untitled-page-7",
                   "docs/05-architecture/api-design",
                   "docs/05-architecture/data-model",
                   "untitled-page",
                   "untitled-page-2"
                 ]
               }
+            ]
+          },
+          {
+            "tab": "Testing",
+            "pages": [
+              "untitled-page-5",
+              "untitled-page-6"
             ]
           },
           {
@@ -144,12 +152,20 @@
                 "pages": [
                   "en/docs/05-architecture/architecture",
                   "en/docs/05-architecture/architecture-decisions",
+                  "untitled-page-10",
                   "en/docs/05-architecture/api-design",
                   "en/docs/05-architecture/data-model",
                   "untitled-page-4",
                   "untitled-page-3"
                 ]
               }
+            ]
+          },
+          {
+            "tab": "Testing",
+            "pages": [
+              "untitled-page-8",
+              "untitled-page-9"
             ]
           },
           {

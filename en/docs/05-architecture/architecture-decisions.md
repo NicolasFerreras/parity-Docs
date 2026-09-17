@@ -24,5 +24,5 @@ title: "Architecture Decisions"
 - **Retention:** ephemeral imports (deleted on processing), 14-day exports via nightly `pg_cron`, SQL always (auditing intact).
 - **Signup and SMTP:** Supabase self-signup (default `empleado`, admin promotes); Resend for welcome emails.
 - **Errors and observability:** Sentry from day 1; in-house metric dashboards deferred to v2.
-- **Tier and secrets:** free tier with keep-alive ping; secrets as service env vars; no staging (local + prod); default domains (`*.pages.dev`, `*.onrender.com`).
+- **Tier and secrets:** free plan with keep-alive ping; secrets stored in service variables; staging = local (Supabase CLI + Docker); production = cloud (Supabase + Render + Cloudflare); default domains.
 - **No bot, no automatic intake:** conversational bot discarded; MVP is manual upload only. Future automatic intake needs its own decision.
