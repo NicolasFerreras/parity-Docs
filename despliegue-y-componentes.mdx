@@ -1,0 +1,114 @@
+---
+title: "Despliegue y componentes"
+---
+
+# Diagrama de Despliegue — Parity
+
+> Visualización de cómo se conectan los componentes del sistema en producción y desarrollo local.
+
+## Producción (Nube)
+
+```mermaid
+flowchart TB
+    subgraph USUARIO["👤 Usuario"]
+        BROWSER["🌐 Browser"]
+    end
+
+    subgraph GITHUB["GitHub"]
+        REPOS["Repositorios<br/>(backend-go + frontend-react)"]
+        ACTIONS["GitHub Actions<br/>CI/CD"]
+    end
+
+    subgraph FRONTEND["Frontend — Cloudflare Pages"]
+        SPA["React + TypeScript<br/>SPA (:443)"]
+    end
+
+    subgraph BACKEND["Backend — Render"]
+        API["Go API Server<br/>(:8080)"]
+        WORKERS["Workers Go<br/>(async jobs)"]
+    end
+
+    subgraph SUPABASE["Supabase Cloud"]
+        PG["PostgreSQL<br/>(:5432)"]
+        AUTH["Supabase Auth<br/>(JWT validation)"]
+        STORAGE["Storage<br/>(archivos Excel/PDF)"]
+    end
+
+    subgraph EXTERNAL["Servicios Externos"]
+        SENTRY["Sentry<br/>(errores)"]
+        RESEND["Resend<br/>(emails transaccionales)"]
+        CRON["cron-job.org<br/>(keep-alive /healthz)"]
+    end
+
+    %% Conexiones
+    BROWSER -->|"HTTPS"| SPA
+    SPA -->|"API REST HTTP"| API
+
+    API -->|"SQL queries"| PG
+    API -->|"JWT validation"| AUTH
+    API -->|"upload/download files"| STORAGE
+    API -->|"capture errors"| SENTRY
+    API -->|"send emails"| RESEND
+
+    WORKERS -->|"process async jobs"| PG
+    WORKERS -->|"LLM processing"| PG
+
+    REPOS -->|"push to main"| ACTIONS
+    ACTIONS -->|"deploy backend"| API
+    ACTIONS -->|"deploy frontend"| SPA
+    ACTIONS -->|"goose up (migraciones)"| PG
+
+    CRON -->|"ping cada 14 min"| API
+
+    %% Estilos
+    classDef frontend fill:#61dafb,stroke:#333,color:#000
+    classDef backend fill:#00ADD8,stroke:#333,color:#fff
+    classDef database fill:#336791,stroke:#333,color:#fff
+    classDef external fill:#FF6B6B,stroke:#333,color:#fff
+    classDef github fill:#24292e,stroke:#333,color:#fff
+
+    class SPA frontend
+    class API,WORKERS backend
+    class PG,AUTH,STORAGE database
+    class SENTRY,RESEND,CRON external
+    class REPOS,ACTIONS github
+```
+
+## Desarrollo Local — Supabase CLI
+
+```mermaid
+flowchart TB
+    subgraph LOCAL["🖥️ Desarrollo Local"]
+        BE["Go API<br/>:8080"]
+        FE["React + Vite<br/>:5173"]
+    end
+
+    subgraph DOCKER["🐳 Docker (Supabase CLI)"]
+        LPG["PostgreSQL<br/>:5432"]
+        LAUTH["Auth<br/>:54321"]
+        LSTORAGE["Storage<br/>:54322"]
+    end
+
+    FE -->|"API REST"| BE
+    BE -->|"SQL"| LPG
+    BE -->|"JWT"| LAUTH
+    BE -->|"files"| LSTORAGE
+
+    classDef local fill:#9B59B6,stroke:#333,color:#fff
+    classDef docker fill:#2496ED,stroke:#333,color:#fff
+
+    class BE,FE local
+    class LPG,LAUTH,LSTORAGE docker
+```
+
+## Leyenda
+
+| Componente | Servicio | Función |
+| --- | --- | --- |
+| **Cloudflare Pages** | Frontend hosting | Sirve la SPA React, CDN global |
+| **Render** | Backend hosting | Ejecuta la API Go + workers async |
+| **Supabase Cloud** | DB + Auth + Storage | PostgreSQL, autenticación JWT, archivos |
+| **Sentry** | Error tracking | Captura y reporta errores del backend |
+| **Resend** | Email transaccional | Emails de bienvenida, notificaciones |
+| **cron-job.org** | Keep-alive | Ping `/healthz` cada 14 min (proyecto free) |
+| **GitHub Actions** | CI/CD | Tests + deploy automático al mergear a main |
