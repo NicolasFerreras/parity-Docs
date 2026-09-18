@@ -13,7 +13,7 @@ title: "Product Definition"
 ## 2. Who it's for
 
 - **Primary user:** the admin employee who loads orders (a significant share of their day goes to validation; goal: from ~30 min down to 2 min per order).
-- **Buyer:** the distributor as an organization (license).
+- **Buyer:** the wholesale distributors as an organization (license).
 - **Non-users shaping the product:** the customers who send orders in their own format.
 
 ## 3. What it does (TO-BE flow)

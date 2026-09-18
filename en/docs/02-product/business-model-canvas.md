@@ -11,7 +11,7 @@ title: "Business Model Canvas"
 | Segment | Detail |
 |---|---|
 | **Direct users** | Admin, billing, logistics and sales employees who receive, verify and load orders. |
-| **Buyer** | The distributor as an organization (license). Hypothesis to validate commercially. |
+| **Buyer** | The wholesale distributors as an organization (license). Hypothesis to validate commercially. |
 | **Indirect users** | The customers who generate the orders (they don't use Parity, but they determine the formats). |
 
 ## 2. Value proposition
@@ -26,7 +26,7 @@ title: "Business Model Canvas"
 
 - **Input:** WhatsApp, email, PDF, Excel, plain text, photo — manual upload only in MVP.
 - **Delivery:** Excel-like dashboard + 1-click export to the internal system format.
-- **Commercial (hypothesis):** direct sale to distributors.
+- **Commercial (hypothesis):** direct sale to wholesale distributors.
 
 ## 4. Customer relationships
 
@@ -55,7 +55,7 @@ title: "Business Model Canvas"
 
 ## 8. Key partners
 
-- Distributors validating domain and real data.
+- Wholesale distributors validating domain and real data.
 - Product team + instructors (impact + frequency + risk + viability criteria).
 
 ## 9. Cost structure (to define)

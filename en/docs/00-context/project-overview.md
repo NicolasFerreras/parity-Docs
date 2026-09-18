@@ -4,13 +4,13 @@ title: "Parity Documentation"
 
 > Operational and product documentation for the Parity platform and its supporting infrastructure.
 
-Parity is a purchase order standardizer for distributors: it receives orders exactly as each customer sends them (Excel, PDF, photo, text), automatically matches them against the internal catalog, and makes them available on a spreadsheet-style dashboard for human review in seconds. It combines a web application, a backend (API), and an extraction pipeline with LLM assistance for difficult cases.
+Parity is a purchase order standardizer for wholesale food distributors: it receives orders exactly as each customer sends them (Excel, PDF, photo, text), automatically matches them against the internal catalog, and makes them available on a spreadsheet-style dashboard for human review in seconds. It combines a web application, a backend (API), and an extraction pipeline with LLM assistance for difficult cases.
 
 This documentation is written for readers in product, operations, and engineering. It explains what Parity aims to achieve, how the core business workflows function, and how the technical system supports them.
 
 ## What Parity Does
 
-Parity helps distributors:
+Parity helps wholesale food distributors:
 
 * Receive orders in any format (Excel, PDF, text) without manual retyping.
 * Automatically identify the customer (company name / CUIT → internal code).
@@ -23,7 +23,7 @@ Parity helps distributors:
 ##  Who it's for
 
 * **Direct users:** admin, billing, logistics and sales employees who receive, verify and load orders.
-* **Buyer:** the distributor as an organization (license).
+* **Buyer:** the wholesale distributors as an organization (license).
 * **Indirect users:** the customers who generate the orders (they don't use Parity, but they determine the formats).
 
 ## Main system components

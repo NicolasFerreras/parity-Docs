@@ -4,7 +4,7 @@ title: "Project Glossary"
 
 # Glossary — Parity
 
-> Domain vocabulary (distributors, purchase orders, catalog). Universal terms, no case-specific references.
+> Domain vocabulary (wholesale distributors, purchase orders, catalog). Universal terms, no case-specific references.
 
 | Term | Definition | Notes |
 |---|---|---|
